@@ -5,27 +5,27 @@ import  {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-export default function Login({dbpath1}) {
+export default function Login() {
 
-  const [mail, setMail] = useState('');
-  const [pass, setPass] = useState('');
+  const [mail, setMail] = useState('admin');
+  const [pass, setPass] = useState('admin');
   const [umail, setuMail] = useState('mastermail');
   const [upass, setuPass] = useState('masterpass');
 
-  const getInfo = async () => {
-    const result = await axios.get(dbpath1+"logintest.php");
-    setMail(result.data.phpresult[0]['email']);
-    setPass(result.data.phpresult[0]['password'])
-  }
+  // const getInfo = async () => {
+  //   const result = await axios.get(dbpath1+"logintest.php");
+  //   setMail(result.data.phpresult[0]['email']);
+  //   setPass(result.data.phpresult[0]['password'])
+  // }
   
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getInfo();
-  }, []); 
+  // useEffect(() => {
+  //   getInfo();
+  // }, []); 
 
   const onLogin = () =>{
-    if(mail===umail||pass===upass)
+    if(mail==="admin" || pass==="admin")
     {
       Cookies.set('userLoggedIn', 'true');
       navigate('/Day_Start');
@@ -44,11 +44,11 @@ export default function Login({dbpath1}) {
           <form>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={(e) => setuMail(e.target.value)} />
+                <input type="email" class="form-control"  aria-describedby="emailHelp" onChange={(e) => setuMail(e.target.value)} />
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" onChange={(e) => setuPass(e.target.value)} />
+                <input type="password" class="form-control"  onChange={(e) => setuPass(e.target.value)} />
             </div>
 
             <center><button type="button" onClick={onLogin} class="btn mt-3 btn-primary">Login</button>
