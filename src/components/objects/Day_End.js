@@ -365,14 +365,37 @@ const getDayStartData = async (dateSelected, adjust) => {
     document.getElementById('savepop').style.marginTop = '-400px';
     document.getElementById('savebtn').style.backgroundColor = 'green';
     } 
-
     function convertDateFormat(inputDate) {
+      // Ensure inputDate is a valid string
+      if (typeof inputDate !== 'string') {
+        console.error('Invalid inputDate:', inputDate);
+        return '';
+      }
+    
       // Split the string into an array [yyyy, mm, dd]
       let parts = inputDate.split('-');
-  
+    
+      // Check if the split resulted in exactly 3 parts
+      if (parts.length !== 3) {
+        console.error('Invalid date format:', inputDate);
+        return '';
+      }
+    
       // Rearrange the array and join it back to a string
       return parts[2] + '-' + parts[1] + '-' + parts[0];
-  }
+    }
+    
+    // Example usage
+    const formattedDate = convertDateFormat('2023-06-26');
+    console.log(formattedDate); // Output: 26-06-2023
+    
+  //   function convertDateFormat(inputDate) {
+  //     // Split the string into an array [yyyy, mm, dd]
+  //     let parts = inputDate.split('-');
+  
+  //     // Rearrange the array and join it back to a string
+  //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+  // }
 
   const loadASaleMs = async () => {
     let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'MS' AND date = '"+datecache+"'";

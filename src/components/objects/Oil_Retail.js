@@ -161,13 +161,13 @@ export default function Oil_Purchase({dbpath1}) {
 
     }
 
-    function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    // function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
 
     useEffect(() => {
         loadOilGodown();
@@ -244,7 +244,9 @@ export default function Oil_Purchase({dbpath1}) {
             
             <div>
             <h2 className='mt-3 text-center'>Retail Sales / Stocks</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span> 
+            <span style={{fontSize:'22px'}}> Date :
+                 {/* {convertDateFormat(datecache)} */}
+                 </span> 
                 <br></br>
 
                 <table class="table">

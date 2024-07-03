@@ -257,19 +257,49 @@ const getPartyInfo = async (value) =>
       }, []); 
       const datecache = Cookies.get('dateCookies');
 
+
       function convertDateFormat(inputDate) {
+        // Ensure the input is a string
+        if (typeof inputDate !== 'string') {
+            throw new Error('Input must be a string in the format yyyy-mm-dd');
+        }
+    
         // Split the string into an array [yyyy, mm, dd]
         let parts = inputDate.split('-');
+        
+        // Validate the date parts
+        if (parts.length !== 3) {
+            throw new Error('Input must be in the format yyyy-mm-dd');
+        }
+        
+        // Destructure parts to get year, month, and day
+        const [year, month, day] = parts;
     
+        // Ensure that year, month, and day are valid
+        if (year.length !== 4 || month.length !== 2 || day.length !== 2) {
+            throw new Error('Invalid date format. Expected yyyy-mm-dd');
+        }
+        
         // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
+        return `${day}-${month}-${year}`;
     }
+    
+    // Example usage:
+   // console.log
+    
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
+    
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
     return (
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'>Handloans</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date : {datecache}</span>
             <div>
            
               <h4> <span style={{marginLeft:'800px', marginTop:'10px'}}>Balance : </span> {balance}</h4>

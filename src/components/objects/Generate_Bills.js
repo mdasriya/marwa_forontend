@@ -310,7 +310,7 @@ const getTotalAmount = async () => {
         }
     }
 
-    getTotalAmount(); // This will call the async function
+  //  getTotalAmount(); // This will call the async function
 }, []);
 
 
@@ -392,13 +392,13 @@ const loadBanks = async () => {
         }, []); 
       const datecache = Cookies.get('dateCookies');
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
 
    /*  const printDiv = () => {
         const printableElement = document.getElementById('printableDiv').outerHTML;
@@ -426,7 +426,7 @@ const loadBanks = async () => {
      
             <h2 className='mt-3 text-center'>Generate Bills </h2>
             <div >
-                <b style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)} </b>
+                {/* <b style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)} </b> */}
                 <b style={{fontSize:'18px', marginLeft:'50px'}}> Last Bill : <span id='lastbill'>Loading..</span></b>
             </div>
             <div>
@@ -488,7 +488,7 @@ const loadBanks = async () => {
 
              <h5> <table><tr>
               <td><span style={{marginLeft:"150px"}}> Bill No : {billNo} </span></td> <td><span style={{marginLeft:"300px"}}>For Month : {getMonthName(date)}</span></td></tr>
-              <td><span style={{marginLeft:"150px"}}> Customer Nmae : {customerName}</span></td> <td> <span style={{marginLeft:"300px"}}>Date : {convertDateFormat(dateinBill)}</span></td></table></h5>
+              <td><span style={{marginLeft:"150px"}}> Customer Nmae : {customerName}</span></td> <td> <span style={{marginLeft:"300px"}}>Date : </span></td></table></h5>
                 </div><br></br> <br></br> 
                 <div>
                 <table style={{marginLeft:'22px'}} >
@@ -511,7 +511,7 @@ const loadBanks = async () => {
                         {fetchedData.map((res,index)=>
                                 <tr key={index}>
                                         <td style={{border:'1px solid black'}}>{index+1}</td>   
-                                        <td style={{border:'1px solid black'}}>{convertDateFormat(res.date)}</td>   
+                                        <td style={{border:'1px solid black'}}></td>   
                                         <td style={{border:'1px solid black'}}>{res.bill_no}</td>  
                                         <td style={{border:'1px solid black'}}>{res.vehicleno}</td>
                                         <td style={{border:'1px solid black'}}>{res.product_name}</td>

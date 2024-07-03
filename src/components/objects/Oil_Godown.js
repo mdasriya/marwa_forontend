@@ -183,19 +183,19 @@ export default function Oil_Purchase({dbpath1}) {
       }, []); 
       const datecache = Cookies.get('dateCookies');
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
     return (
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
         <h2 className='mt-3 text-center'>Godown Stock</h2>
              
-        <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+        <span style={{fontSize:'22px'}}> Date : {datecache}</span>
             <br></br>
             <br></br>
             <div>
