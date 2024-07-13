@@ -545,12 +545,12 @@ export default function AddStaff({dbpath1}) {
             });
     } */
 
-    useEffect(() => {
-        loadStaff();
-        setZeros();
-        loadTHistory();
-        loadOilGodown();
-      }, []); 
+    // useEffect(() => {
+    //     loadStaff();
+    //     setZeros();
+    //     loadTHistory();
+    //     loadOilGodown();
+    //   }, []); 
       const datecache = Cookies.get('dateCookies');
 
     //   function convertDateFormat(inputDate) {

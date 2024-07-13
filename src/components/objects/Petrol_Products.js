@@ -26,91 +26,91 @@ export default function Client({dbpath1}) {
       return parts[2] + '-' + parts[1] + '-' + parts[0];
   }
 
-const loadClients = async () => {
-  let query="SELECT * FROM `rwt_petrol_product`;";
-        /*  
-            alert(query); */
-            const url = dbpath1 + 'getDynamic.php';
-            let fData = new FormData();
+// const loadClients = async () => {
+//   let query="SELECT * FROM `rwt_petrol_product`;";
+//         /*  
+//             alert(query); */
+//             const url = dbpath1 + 'getDynamic.php';
+//             let fData = new FormData();
 
-            fData.append('query', query);
+//             fData.append('query', query);
 
-            try {
-                const response = await axios.post(url, fData);
+//             try {
+//                 const response = await axios.post(url, fData);
                 
-                if (response && response.data) {
+//                 if (response && response.data) {
 
-                    if (response.data.phpresult) {
-                        setClients(response.data.phpresult); 
-                        console.log(response.data.phpresult);
+//                     if (response.data.phpresult) {
+//                         setClients(response.data.phpresult); 
+//                         console.log(response.data.phpresult);
 
-                        let i=0;
-                        /*  var elements = document.getElementsByClassName("ratehsd");
-                         for ( i = 0; i < elements.length; i++) {
-                             elements[i].value = dayStartRate[0]['hsd'];
-                         } */
-                         for(i=0;i<response.data.phpresult.length;i++)
-                         {
-                           console.log(i);
-                           document.getElementById('rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['rate'];
-                           document.getElementById('t_amount'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['t_amount'];
-                           document.getElementById('vat'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['vat'];
-                           document.getElementById('cess'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['cess'];
-                           document.getElementById('tcs'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['tcs'];
-                           document.getElementById('gst_rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['gst_rate'];
-                           document.getElementById('lfr_rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['lfr_rate'];
+//                         let i=0;
+//                         /*  var elements = document.getElementsByClassName("ratehsd");
+//                          for ( i = 0; i < elements.length; i++) {
+//                              elements[i].value = dayStartRate[0]['hsd'];
+//                          } */
+//                          for(i=0;i<response.data.phpresult.length;i++)
+//                          {
+//                            console.log(i);
+//                            document.getElementById('rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['rate'];
+//                            document.getElementById('t_amount'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['t_amount'];
+//                            document.getElementById('vat'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['vat'];
+//                            document.getElementById('cess'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['cess'];
+//                            document.getElementById('tcs'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['tcs'];
+//                            document.getElementById('gst_rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['gst_rate'];
+//                            document.getElementById('lfr_rate'+response.data.phpresult[i]['product_id']).value = response.data.phpresult[i]['lfr_rate'];
                            
                          
-                         }
-                    }
+//                          }
+//                     }
 
 
 
-                }
-            } catch (error) {
-                console.log("Please Select Proper Input");
-            }
-    }
+//                 }
+//             } catch (error) {
+//                 console.log("Please Select Proper Input");
+//             }
+//     }
 
     const navigate = useNavigate();
 
-    const onAdd = () =>{
+    // const onAdd = () =>{
         
-        if (product.length === 0) {
-            alert("Product Name Name has been left blank!");
-          }   else if (rate.length === 0) {
-            alert("Rate has been left blank!");
-          }   else if (t_amount.length === 0) {
-            alert("Taxable Amount has been left blank!");
-          }   else if (vat.length === 0) {
-            alert("VAT has been left blank!");
-          }  else if (cess.length === 0) {
-            alert("CESS has been left blank!");
-          }  else if (tcs.length === 0) {
-            alert("TCS has been left blank!");
-          }   else {
-            {
+    //     if (product.length === 0) {
+    //         alert("Product Name Name has been left blank!");
+    //       }   else if (rate.length === 0) {
+    //         alert("Rate has been left blank!");
+    //       }   else if (t_amount.length === 0) {
+    //         alert("Taxable Amount has been left blank!");
+    //       }   else if (vat.length === 0) {
+    //         alert("VAT has been left blank!");
+    //       }  else if (cess.length === 0) {
+    //         alert("CESS has been left blank!");
+    //       }  else if (tcs.length === 0) {
+    //         alert("TCS has been left blank!");
+    //       }   else {
+    //         {
         
-              const url = dbpath1+'delTank.php';
+    //           const url = dbpath1+'delTank.php';
   
-              var query = "INSERT INTO `rwt_petrol_product` (`product_id`, `product_name`, `t_amount`, `vat`, `cess`, `rate`, `tcs`,  `gst_rate`, `lfr_rate`) VALUES (NULL, '"+product+"', '"+t_amount+"', '"+vat+"', '"+cess+"', '"+rate+"', '"+tcs+"', '"+gst_rate+"', '"+lfr_rate+"');";
+    //           var query = "INSERT INTO `rwt_petrol_product` (`product_id`, `product_name`, `t_amount`, `vat`, `cess`, `rate`, `tcs`,  `gst_rate`, `lfr_rate`) VALUES (NULL, '"+product+"', '"+t_amount+"', '"+vat+"', '"+cess+"', '"+rate+"', '"+tcs+"', '"+gst_rate+"', '"+lfr_rate+"');";
   
-              let fData = new FormData();
-              fData.append('query', query);
-              axios.post(url, fData)
-                .then(response => alert(response.data))
-                .catch(error => {
-                  console.log(error.toJSON()); 
-            }); 
-          }
-          loadClients();
+    //           let fData = new FormData();
+    //           fData.append('query', query);
+    //           axios.post(url, fData)
+    //             .then(response => alert(response.data))
+    //             .catch(error => {
+    //               console.log(error.toJSON()); 
+    //         }); 
+    //       }
+    //       loadClients();
             
-        }
-    } 
+    //     }
+    // } 
 
-    useEffect(() => {
-       loadClients();
-      }, []); 
+    // useEffect(() => {
+    //    loadClients();
+    //   }, []); 
 
     
 
@@ -128,46 +128,48 @@ const loadClients = async () => {
             });
     } */
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_petrol_product` WHERE product_id = "+index+";";
+//     const onDelete = async (index) => {
+//       let query="DELETE FROM `rwt_petrol_product` WHERE product_id = "+index+";";
     
-      /* alert(query); */
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+//       /* alert(query); */
+//       const url = dbpath1+'delTank.php';
+//       let fData = new FormData();
+//       fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response => alert(response.data))
-          .catch(error => {
-          console.log(error.toJSON());
-          });
+//       axios.post(url, fData)
+//           .then(response => alert(response.data))
+//           .catch(error => {
+//           console.log(error.toJSON());
+//           });
 
-        loadClients();
-  }
+//         loadClients();
+//   }
 
-  const onSave = async (index) => {
-    let query="UPDATE `rwt_petrol_product` SET `rate` = '"+ document.getElementById('rate'+index).value+"', `t_amount` = '"+ document.getElementById('t_amount'+index).value+"', `vat` = '"+ document.getElementById('vat'+index).value+"', `cess` = '"+ document.getElementById('cess'+index).value+"', `tcs` = '"+ document.getElementById('tcs'+index).value+"', `gst_rate` = '"+ document.getElementById('gst_rate'+index).value+"', `lfr_rate` = '"+ document.getElementById('lfr_rate'+index).value+"' WHERE `product_id` = '"+index+"';";
+//   const onSave = async (index) => {
+//     let query="UPDATE `rwt_petrol_product` SET `rate` = '"+ document.getElementById('rate'+index).value+"', `t_amount` = '"+ document.getElementById('t_amount'+index).value+"', `vat` = '"+ document.getElementById('vat'+index).value+"', `cess` = '"+ document.getElementById('cess'+index).value+"', `tcs` = '"+ document.getElementById('tcs'+index).value+"', `gst_rate` = '"+ document.getElementById('gst_rate'+index).value+"', `lfr_rate` = '"+ document.getElementById('lfr_rate'+index).value+"' WHERE `product_id` = '"+index+"';";
   
-   /*  alert(query); */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//    /*  alert(query); */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response => alert(response.data))
-        .catch(error => {
-        console.log(error.toJSON());
-        });
+//     axios.post(url, fData)
+//         .then(response => alert(response.data))
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
 
-      loadClients();
-}
+//       loadClients();
+// }
 
   const datecache = Cookies.get('dateCookies');
     return (
 
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
-        <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+        <span style={{fontSize:'22px'}}> Date : 
+          {/* {convertDateFormat(datecache)} */}
+          </span>
             <h2 className='mt-3 text-center'>Add Index - Create Petrol / HSD</h2>
             <div>
                 <br></br>
@@ -198,7 +200,9 @@ const loadClients = async () => {
                             <td><input type="text" class="form-control editableInput bigFontWeight" placeholder="GST Rate" onChange={(e) => setGst_rate(e.target.value)} /></td>
                             <td><input type="text" class="form-control editableInput bigFontWeight" placeholder="LFR Rate" onChange={(e) => setLfr_rate(e.target.value)} /></td>
                            
-                            <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={onAdd}
+                            >ADD</button></td>
                         </tr>   
                     </tbody>
                 </table>    
@@ -237,8 +241,12 @@ const loadClients = async () => {
                                     {/* <button type="button" id={"tank"+res.machine_id} class="btn btn-primary " onClick={() => onSave(res.machine_id)}>Save</button> &nbsp;
                                      */}    {/* <button type="button" id={"tank"+res.machine_id} class="btn btn-primary">Close</button> &nbsp;
                                         <button type="button" id={"tank"+res.machine_id} class="btn btn-primary">Open</button> &nbsp; */}
-                                         <button type="button" id={"tank"+res.product_id} class="btn btn-success " onClick={() => onSave(res.product_id)}>Save</button> &nbsp;
-                                        <button type="button" id={"tank"+res.product_id} class="btn btn-danger " onClick={() => onDelete(res.product_id)}>Delete</button>
+                                         <button type="button" id={"tank"+res.product_id} class="btn btn-success "
+                                          // onClick={() => onSave(res.product_id)}
+                                          >Save</button> &nbsp;
+                                        <button type="button" id={"tank"+res.product_id} class="btn btn-danger "
+                                        //  onClick={() => onDelete(res.product_id)}
+                                         >Delete</button>
                                     </td>
                                 </tr>
                             )}

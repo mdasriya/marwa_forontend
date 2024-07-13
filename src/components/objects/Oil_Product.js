@@ -23,103 +23,104 @@ export default function Tank({dbpath1}) {
     const [volume1, setPVolume1] = useState('');
     const [volume2, setPVolume2] = useState('');
     const [type, setType] = useState('');
-    const loadOilProducts = async () => {
-      const result = await axios.get(dbpath1+"getOilProducts.php");
-      setOilproduct(result.data.phpresult);
-      console.log(result.data.phpresult); 
-      let i=0;
-     /*  var elements = document.getElementsByClassName("ratehsd");
-      for ( i = 0; i < elements.length; i++) {
-          elements[i].value = dayStartRate[0]['hsd'];
-      } */
-      for(i=0;i<result.data.phpresult.length;i++)
-      {
-        try
-        {
-          console.log(i);
-        document.getElementById('mrp'+result.data.phpresult[i]['product_id']).value = result.data.phpresult[i]['product_mrp'];
-        document.getElementById('pcs'+result.data.phpresult[i]['product_id']).value = result.data.phpresult[i]['product_pcs_per_caserwt_oil_products'];
-        }
-        catch{
-          console.log('catched expection');
-        }
-      }
-    }
+
+    // const loadOilProducts = async () => {
+    //   const result = await axios.get(dbpath1+"getOilProducts.php");
+    //   setOilproduct(result.data.phpresult);
+    //   console.log(result.data.phpresult); 
+    //   let i=0;
+    //  /*  var elements = document.getElementsByClassName("ratehsd");
+    //   for ( i = 0; i < elements.length; i++) {
+    //       elements[i].value = dayStartRate[0]['hsd'];
+    //   } */
+    //   for(i=0;i<result.data.phpresult.length;i++)
+    //   {
+    //     try
+    //     {
+    //       console.log(i);
+    //     document.getElementById('mrp'+result.data.phpresult[i]['product_id']).value = result.data.phpresult[i]['product_mrp'];
+    //     document.getElementById('pcs'+result.data.phpresult[i]['product_id']).value = result.data.phpresult[i]['product_pcs_per_caserwt_oil_products'];
+    //     }
+    //     catch{
+    //       console.log('catched expection');
+    //     }
+    //   }
+    // }
 
     const navigate = useNavigate();
 
-    const onAdd = () =>{
+    // const onAdd = () =>{
         
-        if (product.length === 0) {
-            alert("Product Name has been left blank!");
-          }   else if (grdae.length === 0) {
-            alert("grade has has been left blank!");
-          }   else if (color.length === 0) {
-            alert("Colour has been left blank!");
-          }   else if (mrp.length === 0) {
-            alert("MRP has been left blank!");
-          }  else if (volume1.length === 0) {
-            alert("Volume has been left blank!");
-          }  else if (volume2.length === 0) {
-            alert("Volume has been left blank!");
-          }  else if (PCSPerCase.length === 0) {
-            alert("PCS per case has been left blank!");
-          }  else if (type.length === 0) {
-            alert("Type has been left blank!");
-          }   else {
-            const url = dbpath1+'addOilProduct.php';
-            let fData = new FormData();
+    //     if (product.length === 0) {
+    //         alert("Product Name has been left blank!");
+    //       }   else if (grdae.length === 0) {
+    //         alert("grade has has been left blank!");
+    //       }   else if (color.length === 0) {
+    //         alert("Colour has been left blank!");
+    //       }   else if (mrp.length === 0) {
+    //         alert("MRP has been left blank!");
+    //       }  else if (volume1.length === 0) {
+    //         alert("Volume has been left blank!");
+    //       }  else if (volume2.length === 0) {
+    //         alert("Volume has been left blank!");
+    //       }  else if (PCSPerCase.length === 0) {
+    //         alert("PCS per case has been left blank!");
+    //       }  else if (type.length === 0) {
+    //         alert("Type has been left blank!");
+    //       }   else {
+    //         const url = dbpath1+'addOilProduct.php';
+    //         let fData = new FormData();
             
-            fData.append('product', product);
-            fData.append('grdae', grdae);
-            fData.append('color', color);
-            fData.append('mrp', mrp);
-            fData.append('volume', volume1+" "+volume2);
-            fData.append('PCSPerCase', PCSPerCase);
-            fData.append('type', type);
-            axios.post(url, fData)
-              .then(response => {alert(response.data); window.location.reload();})
-              .catch(error => {
-                console.log(error.toJSON());
-          });
+    //         fData.append('product', product);
+    //         fData.append('grdae', grdae);
+    //         fData.append('color', color);
+    //         fData.append('mrp', mrp);
+    //         fData.append('volume', volume1+" "+volume2);
+    //         fData.append('PCSPerCase', PCSPerCase);
+    //         fData.append('type', type);
+    //         axios.post(url, fData)
+    //           .then(response => {alert(response.data); window.location.reload();})
+    //           .catch(error => {
+    //             console.log(error.toJSON());
+    //       });
             
-        }
-    }
+    //     }
+    // }
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_oil_products` WHERE product_id = "+index+";";
+  //   const onDelete = async (index) => {
+  //     let query="DELETE FROM `rwt_oil_products` WHERE product_id = "+index+";";
     
-      /* alert(query); */
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+  //     /* alert(query); */
+  //     const url = dbpath1+'delTank.php';
+  //     let fData = new FormData();
+  //     fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response =>{ alert(response.data); window.location.reload();})
-          .catch(error => {
-          console.log(error.toJSON());
-          });
-  }
+  //     axios.post(url, fData)
+  //         .then(response =>{ alert(response.data); window.location.reload();})
+  //         .catch(error => {
+  //         console.log(error.toJSON());
+  //         });
+  // }
 
-  const onSave = async (index) => {
-    let query="UPDATE `rwt_oil_products` SET `product_pcs_per_caserwt_oil_products` = '"+ document.getElementById('pcs'+index).value+"', `product_mrp` = '"+document.getElementById('mrp'+index).value+"' WHERE `product_id` = '"+index+"';";
+//   const onSave = async (index) => {
+//     let query="UPDATE `rwt_oil_products` SET `product_pcs_per_caserwt_oil_products` = '"+ document.getElementById('pcs'+index).value+"', `product_mrp` = '"+document.getElementById('mrp'+index).value+"' WHERE `product_id` = '"+index+"';";
   
-    /* alert(query); */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//     /* alert(query); */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response =>{ alert(response.data);/*  window.location.reload(); */})
-        .catch(error => {
-        console.log(error.toJSON());
-        });
-}
+//     axios.post(url, fData)
+//         .then(response =>{ alert(response.data);/*  window.location.reload(); */})
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
+// }
   
-    useEffect(() => {
-       loadOilProducts();
+    // useEffect(() => {
+    //    loadOilProducts();
       
-      }, []); 
+    //   }, []); 
       const datecache = Cookies.get('dateCookies');
 
       function convertDateFormat(inputDate) {
@@ -135,7 +136,9 @@ export default function Tank({dbpath1}) {
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'>Add Index - Create Oil</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </span>
             <div>
                 <br></br>
                 <table class="table">
@@ -180,7 +183,9 @@ export default function Tank({dbpath1}) {
           
                                 </select>  
                             </td>
-                            <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={onAdd}
+                            >ADD</button></td>
                             
                         </tr>   
                     </tbody>
@@ -218,9 +223,14 @@ export default function Tank({dbpath1}) {
                                         <button type="button" id={" tank"+   res.tank_no} class="btn btn-primary">Close</button> &nbsp;
                                       
                                       <button type="button" id={"tank"+res.tank_no} class="btn btn-primary">Open</button> &nbsp; */}
-                                          <button type="button" id={"tank"+res.product_id} class="btn btn-success " onClick={() => onSave(res.product_id)}>Save</button> &nbsp;&nbsp;
+                                          <button type="button" id={"tank"+res.product_id} class="btn btn-success " 
+                                          
+                                          // onClick={() => onSave(res.product_id)}
+                                          >Save</button> &nbsp;&nbsp;
     
-                                        <button type="button" id={"tank"+res.product_id} class="btn btn-danger " onClick={() => onDelete(res.product_id)}>Delete</button>
+                                        <button type="button" id={"tank"+res.product_id} class="btn btn-danger "
+                                        //  onClick={() => onDelete(res.product_id)}
+                                         >Delete</button>
                                     </td>
                                 </tr>   
                             )}

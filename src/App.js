@@ -78,29 +78,25 @@ import CardsReport1 from "./components/Reports/CardsReport1";
 import CardsReport2 from "./components/Reports/CardsReport2";
 import CardsReport3 from "./components/Reports/CardsReport3";
 import MainHome from "./components/objects/MainHome";
+import MachineLayout from "./components/objects/MachineLayout";
+import New from "./components/objects/New";
+import { Toaster } from "react-hot-toast";
+import MachineReadings from "./components/objects/MachineReadings";
+import ReadingComponent from "./components/objects/ReadingComponent";
+import NozzleProductWise from "./components/objects/NozzleProductWise";
 
 function App() {
-  var dbpath1 = "https://test.royalswebtech.com/marwah/a-database/";
 
-  const [dateDayStart, setDate] = useState("");
-
-  const [date1, setDate1] = useState("");
-  const [date2, setDate2] = useState("");
-  const [date3, setDate3] = useState("");
-  const [date4, setDate4] = useState("");
-  const [date5, setDate5] = useState("");
-  const [date6, setDate6] = useState("");
-  const [date7, setDate7] = useState("");
-  const [date8, setDate8] = useState("");
 
   return (
+
     <Router>
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <Login dbpath1={dbpath1} dateDayStart={dateDayStart} />
+              <Login  />
             </>
           }
         />
@@ -115,7 +111,94 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <MainHome  date={date2} />
+                  <MainHome />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/new"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+             <New  />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/machinelayout"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <MachineLayout   />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+
+<Route
+          path="/machineReadings"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <MachineReadings />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+
+<Route
+          path="/readingcomponent"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <ReadingComponent />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/nozzleproductwise"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                <NozzleProductWise/>
                 </div>
               </div>
             </>
@@ -132,7 +215,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport />
                 </div>
               </div>
             </>
@@ -149,7 +232,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport  />
                 </div>
               </div>
             </>
@@ -166,7 +249,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport/>
                 </div>
               </div>
             </>
@@ -183,7 +266,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport />
                 </div>
               </div>
             </>
@@ -200,7 +283,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport />
                 </div>
               </div>
             </>
@@ -217,7 +300,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport1 dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport1 />
                 </div>
               </div>
             </>
@@ -234,7 +317,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport2 dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport2 />
                 </div>
               </div>
             </>
@@ -251,7 +334,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <ExpensesReport3 dbpath1={dbpath1} date={date2} />
+                  <ExpensesReport3 />
                 </div>
               </div>
             </>
@@ -268,7 +351,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <AdvancesHandloanReport dbpath1={dbpath1} date={date2} />
+                  <AdvancesHandloanReport />
                 </div>
               </div>
             </>
@@ -285,7 +368,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <AdvancesHandloanReport1 dbpath1={dbpath1} date={date2} />
+                  <AdvancesHandloanReport1 />
                 </div>
               </div>
             </>
@@ -302,7 +385,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <AdvancesHandloanReport2 dbpath1={dbpath1} date={date2} />
+                  <AdvancesHandloanReport2 />
                 </div>
               </div>
             </>
@@ -319,7 +402,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <AdvancesHandloanReport3 dbpath1={dbpath1} date={date2} />
+                  <AdvancesHandloanReport3 />
                 </div>
               </div>
             </>
@@ -336,7 +419,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <BankStatements dbpath1={dbpath1} date={date2} />
+                  <BankStatements />
                 </div>
               </div>
             </>
@@ -353,7 +436,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <BankStatements1 dbpath1={dbpath1} date={date2} />
+                  <BankStatements1 />
                 </div>
               </div>
             </>
@@ -370,7 +453,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <BankStatements2 dbpath1={dbpath1} date={date2} />
+                  <BankStatements2 />
                 </div>
               </div>
             </>
@@ -387,7 +470,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <BankStatements3 dbpath1={dbpath1} date={date2} />
+                  <BankStatements3 />
                 </div>
               </div>
             </>
@@ -404,7 +487,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CardsReport dbpath1={dbpath1} date={date2} />
+                  <CardsReport />
                 </div>
               </div>
             </>
@@ -421,7 +504,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CardsReport1 dbpath1={dbpath1} date={date2} />
+                  <CardsReport1 />
                 </div>
               </div>
             </>
@@ -438,7 +521,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CardsReport2 dbpath1={dbpath1} date={date2} />
+                  <CardsReport2 />
                 </div>
               </div>
             </>
@@ -455,7 +538,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CardsReport3 dbpath1={dbpath1} date={date2} />
+                  <CardsReport3 />
                 </div>
               </div>
             </>
@@ -472,7 +555,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport1 dbpath1={dbpath1} date={date2} />
+                  <CreditReport1 />
                 </div>
               </div>
             </>
@@ -489,7 +572,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport1 dbpath1={dbpath1} date={date2} />
+                  <CreditReport1 />
                 </div>
               </div>
             </>
@@ -506,7 +589,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport1 dbpath1={dbpath1} date={date2} />
+                  <CreditReport1 />
                 </div>
               </div>
             </>
@@ -523,7 +606,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport2 dbpath1={dbpath1} date={date2} />
+                  <CreditReport2 />
                 </div>
               </div>
             </>
@@ -540,7 +623,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport3 dbpath1={dbpath1} date={date2} />
+                  <CreditReport3 />
                 </div>
               </div>
             </>
@@ -557,7 +640,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditReport4 dbpath1={dbpath1} date={date2} />
+                  <CreditReport4 />
                 </div>
               </div>
             </>
@@ -574,7 +657,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <CreditClientReport dbpath1={dbpath1} date={date2} />
+                  <CreditClientReport />
                 </div>
               </div>
             </>
@@ -591,7 +674,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport1 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport1 />
                 </div>
               </div>
             </>
@@ -608,7 +691,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport2 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport2 />
                 </div>
               </div>
             </>
@@ -625,7 +708,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport3 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport3 />
                 </div>
               </div>
             </>
@@ -642,7 +725,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport4 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport4 />
                 </div>
               </div>
             </>
@@ -659,7 +742,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport5 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport5 />
                 </div>
               </div>
             </>
@@ -676,7 +759,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <PetrolReport6 dbpath1={dbpath1} date={date2} />
+                  <PetrolReport6 />
                 </div>
               </div>
             </>
@@ -693,7 +776,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Dashboard dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Dashboard  />
                 </div>
               </div>
             </>
@@ -711,16 +794,7 @@ function App() {
                 <div>
                   <Navbar />
                   <PetrolReport
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
-                    setDate1={setDate1}
-                    setDate2={setDate2}
-                    setDate3={setDate3}
-                    setDate4={setDate4}
-                    setDate5={setDate5}
-                    setDate6={setDate6}
-                    setDate7={setDate7}
-                    setDate8={setDate8}
+                   
                   />
                 </div>
               </div>
@@ -738,7 +812,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Day_End dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Day_End  />
                 </div>
               </div>
             </>
@@ -755,7 +829,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Nozzles dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Nozzles  />
                 </div>
               </div>
             </>
@@ -773,8 +847,7 @@ function App() {
                 <div>
                   <Navbar />
                   <pouches_godown
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+        
                   />
                 </div>
               </div>
@@ -793,8 +866,7 @@ function App() {
                 <div>
                   <Navbar />
                   <pouches_purchase
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                  
                   />
                 </div>
               </div>
@@ -812,7 +884,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Petro_Card dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Petro_Card  />
                 </div>
               </div>
             </>
@@ -830,8 +902,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Wallet_Payment
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -849,7 +921,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Add_Wallet dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Add_Wallet  />
                 </div>
               </div>
             </>
@@ -867,8 +939,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Add_Petro_Card
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -886,7 +958,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Staff_Salary dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Staff_Salary  />
                 </div>
               </div>
             </>
@@ -903,7 +975,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Variation dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Variation  />
                 </div>
               </div>
             </>
@@ -921,8 +993,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Statement_Entry
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -941,8 +1013,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Bank_Deposits
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -960,7 +1032,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Tank dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Tank  />
                 </div>
               </div>
             </>
@@ -978,9 +1050,9 @@ function App() {
                 <div>
                   <Navbar />
                   <Day_Start
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
-                    setDate={setDate}
+                   
+                  
+               
                   />
                 </div>
               </div>
@@ -999,8 +1071,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Bank_Statement
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1018,7 +1090,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Add_Staff dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Add_Staff  />
                 </div>
               </div>
             </>
@@ -1035,7 +1107,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Machine dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Machine  />
                 </div>
               </div>
             </>
@@ -1053,8 +1125,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Client_Cheque
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1072,7 +1144,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Oil_Pouches dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Oil_Pouches  />
                 </div>
               </div>
             </>
@@ -1089,7 +1161,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Add_Mode dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Add_Mode  />
                 </div>
               </div>
             </>
@@ -1106,7 +1178,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Sale_Fuels dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Sale_Fuels  />
                 </div>
               </div>
             </>
@@ -1123,7 +1195,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Oil_Purchase dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Oil_Purchase  />
                 </div>
               </div>
             </>
@@ -1141,8 +1213,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Generate_Bills
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1160,7 +1232,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Add_Bank dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Add_Bank  />
                 </div>
               </div>
             </>
@@ -1178,8 +1250,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Petrol_Decantation
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1198,8 +1270,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Petrol_Invoice_Feeding
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1217,7 +1289,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Oil_Godown dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Oil_Godown  />
                 </div>
               </div>
             </>
@@ -1234,7 +1306,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Client dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Client  />
                 </div>
               </div>
             </>
@@ -1251,7 +1323,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Client2 dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Client2  />
                 </div>
               </div>
             </>
@@ -1269,8 +1341,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Credit_Client
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1288,7 +1360,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Handloans dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Handloans  />
                 </div>
               </div>
             </>
@@ -1305,7 +1377,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Advances dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Advances  />
                 </div>
               </div>
             </>
@@ -1322,7 +1394,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Expenses dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Expenses  />
                 </div>
               </div>
             </>
@@ -1339,7 +1411,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Oil_Retail dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Oil_Retail  />
                 </div>
               </div>
             </>
@@ -1356,7 +1428,7 @@ function App() {
                 </div>
                 <div>
                   <Navbar />
-                  <Oil_Products dbpath1={dbpath1} dateDayStart={dateDayStart} />
+                  <Oil_Products  />
                 </div>
               </div>
             </>
@@ -1374,8 +1446,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Petrol_Products
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1394,8 +1466,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Add_Oil_Pouches
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>
@@ -1413,8 +1485,8 @@ function App() {
                 <div>
                   <Navbar />
                   <Add_Expenses_Topic
-                    dbpath1={dbpath1}
-                    dateDayStart={dateDayStart}
+                   
+                  
                   />
                 </div>
               </div>

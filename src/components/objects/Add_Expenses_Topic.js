@@ -36,176 +36,178 @@ export default function Add_Expenses_Topic({dbpath1}) {
 
     const [name, setName] = useState('');
 
-    const loadBanks = async () => {
-      let query="select * from rwt_bank_account WHERE account_status='active'";
+    // const loadBanks = async () => {
+    //   let query="select * from rwt_bank_account WHERE account_status='active'";
            
-      /*    alert(query); */
-         const url = dbpath1 + 'getDynamic.php';
-         let fData = new FormData();
+    //   /*    alert(query); */
+    //      const url = dbpath1 + 'getDynamic.php';
+    //      let fData = new FormData();
   
-         fData.append('query', query);
+    //      fData.append('query', query);
   
-             const response = await axios.post(url, fData);
+    //          const response = await axios.post(url, fData);
              
-             if (response && response.data) {
+    //          if (response && response.data) {
                  
-                 if (response.data.phpresult) {
-                     setBanks(response.data.phpresult); 
-                     console.log(response.data.phpresult);
-                 }
-             }
-    }
+    //              if (response.data.phpresult) {
+    //                  setBanks(response.data.phpresult); 
+    //                  console.log(response.data.phpresult);
+    //              }
+    //          }
+    // }
 
-    const loadExpenses = async () => {
+    // const loadExpenses = async () => {
 
       
 
-      let query="select * from rwt_expense_name ";
+    //   let query="select * from rwt_expense_name ";
              
-      /*    alert(query); */
-         const url = dbpath1 + 'getDynamic.php';
-         let fData = new FormData();
+    //   /*    alert(query); */
+    //      const url = dbpath1 + 'getDynamic.php';
+    //      let fData = new FormData();
 
-         fData.append('query', query);
+    //      fData.append('query', query);
 
-             const response = await axios.post(url, fData);
+    //          const response = await axios.post(url, fData);
              
-             if (response && response.data) {
+    //          if (response && response.data) {
                  
-                 if (response.data.phpresult) {
-                     setExpensename(response.data.phpresult); 
-                     console.log(response.data.phpresult);  
-                   /*  let i=0;
-                     for(i=1;i<=response.data.phpresult.length;i++)
-                     {
-                       // alert('category'+i);
-                       try
-                       {
-                          document.getElementById('category'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['category'];
-                          document.getElementById('machinename'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['machinename'];
-                          document.getElementById('tid1'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid1'];
-                          document.getElementById('tid2'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid2'];
-                          document.getElementById('tid3'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid3'];
-                          document.getElementById('batchno'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['batch'];
-                          document.getElementById('bank'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['bank'];
-                       }
-                       catch
-                       {
-                          console.log('error catched');
-                       }    
-                    } */
-                 }
-             }
+    //              if (response.data.phpresult) {
+    //                  setExpensename(response.data.phpresult); 
+    //                  console.log(response.data.phpresult);  
+    //                /*  let i=0;
+    //                  for(i=1;i<=response.data.phpresult.length;i++)
+    //                  {
+    //                    // alert('category'+i);
+    //                    try
+    //                    {
+    //                       document.getElementById('category'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['category'];
+    //                       document.getElementById('machinename'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['machinename'];
+    //                       document.getElementById('tid1'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid1'];
+    //                       document.getElementById('tid2'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid2'];
+    //                       document.getElementById('tid3'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['tid3'];
+    //                       document.getElementById('batchno'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['batch'];
+    //                       document.getElementById('bank'+response.data.phpresult[(i-1)]['id']).value = response.data.phpresult[(i-1)]['bank'];
+    //                    }
+    //                    catch
+    //                    {
+    //                       console.log('error catched');
+    //                    }    
+    //                 } */
+    //              }
+    //          }
 
              
-      let i=0;
-     /*  var elements = document.getElementsByClassName("ratehsd");
-      for ( i = 0; i < elements.length; i++) {
-          elements[i].value = dayStartRate[0]['hsd'];
-      } */
-      for(i=0;i<response.data.phpresult.length;i++)
-      {
-        try
-        {
-          console.log(i);
-        document.getElementById('mrp'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['amount'];
-        document.getElementById('pcs'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['pcs_per_box'];
-        }
-        catch{
-          console.log('catched expection');
-        }
-      }
-    }
+    //   let i=0;
+    //  /*  var elements = document.getElementsByClassName("ratehsd");
+    //   for ( i = 0; i < elements.length; i++) {
+    //       elements[i].value = dayStartRate[0]['hsd'];
+    //   } */
+    //   for(i=0;i<response.data.phpresult.length;i++)
+    //   {
+    //     try
+    //     {
+    //       console.log(i);
+    //     document.getElementById('mrp'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['amount'];
+    //     document.getElementById('pcs'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['pcs_per_box'];
+    //     }
+    //     catch{
+    //       console.log('catched expection');
+    //     }
+    //   }
+    // }
 
     const navigate = useNavigate();
 
-    const onAdd = () =>{
-      if (name.length === 0) {
-        alert("Name has been left blank!");
-      }   
-     else {
+    // const onAdd = () =>{
+    //   if (name.length === 0) {
+    //     alert("Name has been left blank!");
+    //   }   
+    //  else {
   
-        let query="INSERT INTO `rwt_expense_name` (`id`, `name`, `status`) VALUES (NULL, '"+name+"', 'Active');";
-        /*  alert(query); */   
-         const url = dbpath1+'delTank.php';
-         let fData = new FormData();
-         fData.append('query', query);
+    //     let query="INSERT INTO `rwt_expense_name` (`id`, `name`, `status`) VALUES (NULL, '"+name+"', 'Active');";
+    //     /*  alert(query); */   
+    //      const url = dbpath1+'delTank.php';
+    //      let fData = new FormData();
+    //      fData.append('query', query);
          
-         axios.post(url, fData)
-         .then(response => {alert(response.data);  window.location.reload();})
-             .catch(error => {
-             console.log(error.toJSON());
-      });
-    }
-    }
+    //      axios.post(url, fData)
+    //      .then(response => {alert(response.data);  window.location.reload();})
+    //          .catch(error => {
+    //          console.log(error.toJSON());
+    //   });
+    // }
+    // }
     
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_expense_name` WHERE id = "+index+";";
+  //   const onDelete = async (index) => {
+  //     let query="DELETE FROM `rwt_expense_name` WHERE id = "+index+";";
     
-      /* alert(query); */
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+  //     /* alert(query); */
+  //     const url = dbpath1+'delTank.php';
+  //     let fData = new FormData();
+  //     fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response =>{ alert(response.data); window.location.reload();})  
-          .catch(error => {
-          console.log(error.toJSON());
-          });
-  }
+  //     axios.post(url, fData)
+  //         .then(response =>{ alert(response.data); window.location.reload();})  
+  //         .catch(error => {
+  //         console.log(error.toJSON());
+  //         });
+  // }
 
-  const setStatus = async (index,pstatus) => {
-    let query="UPDATE `rwt_expense_name` SET `status` = '"+pstatus+"' WHERE `id` = '"+index+"';";
+//   const setStatus = async (index,pstatus) => {
+//     let query="UPDATE `rwt_expense_name` SET `status` = '"+pstatus+"' WHERE `id` = '"+index+"';";
   
-    /* alert(query); */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//     /* alert(query); */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response =>{ alert(response.data); window.location.reload();})  
-        .catch(error => {
-        console.log(error.toJSON());
-        });
-}
+//     axios.post(url, fData)
+//         .then(response =>{ alert(response.data); window.location.reload();})  
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
+// }
 
-  const onSave = async (index) => {
-    let query="UPDATE `rwt_petro_card` SET `category` = '"+ document.getElementById('category'+index).value+"', `machinename` = '"+ document.getElementById('machinename'+index).value+"', `tid1` = '"+ document.getElementById('tid1'+index).value+"', `tid2` = '"+ document.getElementById('tid2'+index).value+"', `tid3` = '"+ document.getElementById('tid3'+index).value+"', `batch` = '"+ document.getElementById('batchno'+index).value+"', `bank` = '"+ document.getElementById('bank'+index).value+"' WHERE `id` = "+index+";";
+//   const onSave = async (index) => {
+//     let query="UPDATE `rwt_petro_card` SET `category` = '"+ document.getElementById('category'+index).value+"', `machinename` = '"+ document.getElementById('machinename'+index).value+"', `tid1` = '"+ document.getElementById('tid1'+index).value+"', `tid2` = '"+ document.getElementById('tid2'+index).value+"', `tid3` = '"+ document.getElementById('tid3'+index).value+"', `batch` = '"+ document.getElementById('batchno'+index).value+"', `bank` = '"+ document.getElementById('bank'+index).value+"' WHERE `id` = "+index+";";
   
-    /*   */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//     /*   */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response =>{ alert(response.data);/*  window.location.reload(); */})
-        .catch(error => {
-        console.log(error.toJSON());
-        });
-}
+//     axios.post(url, fData)
+//         .then(response =>{ alert(response.data);/*  window.location.reload(); */})
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
+// }
   
-    useEffect(() => {
-       loadExpenses();
-       loadBanks();
+    // useEffect(() => {
+    //    loadExpenses();
+    //    loadBanks();
       
-      }, [2000]); 
+    //   }, [2000]); 
       const datecache = Cookies.get('dateCookies');
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
     return (
 
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'>Add Expenses Topic</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </span>
             <div>
                 <br></br>
                 <table class="table" style={{width:'400px'}}>
@@ -223,7 +225,9 @@ export default function Add_Expenses_Topic({dbpath1}) {
                             </td>  
                        
 
-                           <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                           <td><button type="button" class="btn btn-primary" 
+                          //  onClick={onAdd}
+                           >ADD</button></td>
                             
                         </tr>   
                     </tbody>
@@ -253,9 +257,16 @@ export default function Add_Expenses_Topic({dbpath1}) {
 
                                     <td style={{width:''}}>
                    
-                                         <button type="button" id={"tank"+res.id} class="btn btn-danger " onClick={() => onDelete(res.id)}>Delete</button>&nbsp;
-                                         <button type="button" id={"tank"+res.id} class="btn btn-info " onClick={() => setStatus(res.id,'Active')}>Open</button>&nbsp;
-                                        <button type="button" id={"tank"+res.id} class="btn btn-warning " onClick={() => setStatus(res.id,'Closed')}>Close</button>
+                                         <button type="button" id={"tank"+res.id} class="btn btn-danger " 
+                                        //  onClick={() => onDelete(res.id)}
+                                         >
+                                          Delete</button>&nbsp;
+                                         <button type="button" id={"tank"+res.id} class="btn btn-info " 
+                                        //  onClick={() => setStatus(res.id,'Active')}
+                                         >Open</button>&nbsp;
+                                        <button type="button" id={"tank"+res.id} class="btn btn-warning "
+                                        //  onClick={() => setStatus(res.id,'Closed')}
+                                         >Close</button>
                                    </td>
                                 </tr>   
                             )}

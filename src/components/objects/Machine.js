@@ -23,34 +23,34 @@ const [inputProduct, setInputProduct] = useState({});
 const [inputNozzlesInMpd, setInputNozzlesInMpd] = useState({});
 
 
-const loadMachines = async () => {
-  const result = await axios.get(dbpath1 + "getMachine.php");
-  setMachines(result.data.phpresult);
+// const loadMachines = async () => {
+//   const result = await axios.get(dbpath1 + "getMachine.php");
+//   setMachines(result.data.phpresult);
 
-  // Other initial state settings
-  const initialDispensingUnitNo = {};
-  const initialMake = {};
-  const initialSerialNo = {};
-  const initialConnectedTanks = {};
-  const initialProduct = {};
-  const initialNozzlesInMpd = {};
+//   // Other initial state settings
+//   const initialDispensingUnitNo = {};
+//   const initialMake = {};
+//   const initialSerialNo = {};
+//   const initialConnectedTanks = {};
+//   const initialProduct = {};
+//   const initialNozzlesInMpd = {};
 
-  result.data.phpresult.forEach(machines => {
-      initialDispensingUnitNo[machines.machine_id] = machines.dispensing_unit_no;
-      initialMake[machines.machine_id] = machines.make;
-      initialSerialNo[machines.machine_id] = machines.serial_no;
-      initialConnectedTanks[machines.machine_id] = machines.connected_tanks;
-      initialProduct[machines.machine_id] = machines.product;
-      initialNozzlesInMpd[machines.machine_id] = machines.nozzles_in_mpd;
-  });
+//   result.data.phpresult.forEach(machines => {
+//       initialDispensingUnitNo[machines.machine_id] = machines.dispensing_unit_no;
+//       initialMake[machines.machine_id] = machines.make;
+//       initialSerialNo[machines.machine_id] = machines.serial_no;
+//       initialConnectedTanks[machines.machine_id] = machines.connected_tanks;
+//       initialProduct[machines.machine_id] = machines.product;
+//       initialNozzlesInMpd[machines.machine_id] = machines.nozzles_in_mpd;
+//   });
 
-  setInputDispensingUnitNo(initialDispensingUnitNo);
-  setInputMake(initialMake);
-  setInputSerialNo(initialSerialNo);
-  setInputConnectedTanks(initialConnectedTanks);
-  setInputProduct(initialProduct);
-  setInputNozzlesInMpd(initialNozzlesInMpd);
-}
+//   setInputDispensingUnitNo(initialDispensingUnitNo);
+//   setInputMake(initialMake);
+//   setInputSerialNo(initialSerialNo);
+//   setInputConnectedTanks(initialConnectedTanks);
+//   setInputProduct(initialProduct);
+//   setInputNozzlesInMpd(initialNozzlesInMpd);
+// }
 
     const navigate = useNavigate();
 
@@ -87,9 +87,9 @@ const loadMachines = async () => {
         }
     }
 
-    useEffect(() => {
-        loadMachines();
-      }, []); 
+    // useEffect(() => {
+    //     loadMachines();
+    //   }, []); 
 
       const onDelete = async (index) => {
         let query="DELETE FROM `pupc_machines` WHERE machine_id = "+index+";";
@@ -135,7 +135,9 @@ const loadMachines = async () => {
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'> Create Machine</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </span>
             <div>
                 <br></br>
                 <table class="table">
@@ -160,7 +162,9 @@ const loadMachines = async () => {
                             <td><input type="text" class="form-control editableInput bigFontWeight" placeholder="Connected Tank" onChange={(e) => setconnected_tanks(e.target.value)} /></td>
                             <td><input type="text" class="form-control editableInput bigFontWeight" placeholder="Product" onChange={(e) => setproduct(e.target.value)} /></td>
                             <td><input type="text" class="form-control editableInput bigFontWeight" placeholder="Nozzles in MPD" onChange={(e) => setnozzles_in_mpd(e.target.value)} /></td>
-                            <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={onAdd}
+                            >ADD</button></td>
                         </tr>   
                     </tbody>
                 </table>    
