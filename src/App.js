@@ -78,6 +78,12 @@ import CardsReport1 from "./components/Reports/CardsReport1";
 import CardsReport2 from "./components/Reports/CardsReport2";
 import CardsReport3 from "./components/Reports/CardsReport3";
 import MainHome from "./components/objects/MainHome";
+import MachineLayout from "./components/objects/MachineLayout";
+import New from "./components/objects/New";
+import { Toaster } from "react-hot-toast";
+import MachineReadings from "./components/objects/MachineReadings";
+import ReadingComponent from "./components/objects/ReadingComponent";
+import NozzleProductWise from "./components/objects/NozzleProductWise";
 
 function App() {
   var dbpath1 = "https://test.royalswebtech.com/marwah/a-database/";
@@ -94,6 +100,7 @@ function App() {
   const [date8, setDate8] = useState("");
 
   return (
+
     <Router>
       <Routes>
         <Route
@@ -116,6 +123,93 @@ function App() {
                 <div>
                   <Navbar />
                   <MainHome  date={date2} />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/new"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+             <New  />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/machinelayout"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <MachineLayout  date={date3} />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+
+<Route
+          path="/machineReadings"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <MachineReadings />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+
+<Route
+          path="/readingcomponent"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                  <ReadingComponent />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+<Route
+          path="/nozzleproductwise"
+          element={
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                  <Sidebar />
+                </div>
+                <div>
+                  <Navbar />
+                <NozzleProductWise/>
                 </div>
               </div>
             </>

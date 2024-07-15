@@ -181,58 +181,58 @@ export default function Petrol_Invoice_Feeding({dbpath1}) {
 //     return parts[2] + '-' + parts[1] + '-' + parts[0];
 // }
 
-  const displaySelectedProduct = async (index) => {
-    let query="select * FROM `pupc_machines` WHERE dispensing_unit_no = '"+index+"';";
-   /*  
-    alert(query); */
-    const url = dbpath1 + 'getDynamic.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//   const displaySelectedProduct = async (index) => {
+//     let query="select * FROM `pupc_machines` WHERE dispensing_unit_no = '"+index+"';";
+//    /*  
+//     alert(query); */
+//     const url = dbpath1 + 'getDynamic.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
 
-    try {
-        const response = await axios.post(url, fData);
+//     try {
+//         const response = await axios.post(url, fData);
         
-        if (response && response.data) {
+//         if (response && response.data) {
             
-            if (response.data.phpresult) {
-                setSMachine(response.data.phpresult); 
-                console.log(response.data.phpresult);
-                document.getElementById('ddun').innerHTML=response.data.phpresult[0]['dispensing_unit_no'];
-                document.getElementById('dmake').innerHTML=response.data.phpresult[0]['make'];
-                document.getElementById('dserial_no').innerHTML=response.data.phpresult[0]['serial_no'];
-                document.getElementById('dconnected_tanks').innerHTML=response.data.phpresult[0]['connected_tanks'];
-                document.getElementById('dproduct').innerHTML=response.data.phpresult[0]['product'];
-                document.getElementById('dnozzles_in_mpd').innerHTML=response.data.phpresult[0]['nozzles_in_mpd'];
-            }
-        }
-    } catch (error) {
-        console.log("Please Select Proper Input");
-    }
-}
+//             if (response.data.phpresult) {
+//                 setSMachine(response.data.phpresult); 
+//                 console.log(response.data.phpresult);
+//                 document.getElementById('ddun').innerHTML=response.data.phpresult[0]['dispensing_unit_no'];
+//                 document.getElementById('dmake').innerHTML=response.data.phpresult[0]['make'];
+//                 document.getElementById('dserial_no').innerHTML=response.data.phpresult[0]['serial_no'];
+//                 document.getElementById('dconnected_tanks').innerHTML=response.data.phpresult[0]['connected_tanks'];
+//                 document.getElementById('dproduct').innerHTML=response.data.phpresult[0]['product'];
+//                 document.getElementById('dnozzles_in_mpd').innerHTML=response.data.phpresult[0]['nozzles_in_mpd'];
+//             }
+//         }
+//     } catch (error) {
+//         console.log("Please Select Proper Input");
+//     }
+// }
 
-const getCacheData = () => {
+// const getCacheData = () => {
    
-    const ino = Cookies.get('petrolInoviceNo');
-    setInvoiceNo(ino);
-}
+//     const ino = Cookies.get('petrolInoviceNo');
+//     setInvoiceNo(ino);
+// }
 
-const setCacheData = () => {
+// const setCacheData = () => {
     
-    Cookies.set('petrolInoviceNo', invoice_no);
-    Cookies.set('userLoggedIn', 'true');
-}
+//     Cookies.set('petrolInoviceNo', invoice_no);
+//     Cookies.set('userLoggedIn', 'true');
+// }
 
-    useEffect(() => {
-        loadProductData();
-        loadInvoiceFeeding();
-        loadMachine();
-        loadtamount();
-        setDate(datecache);
+//     useEffect(() => {
+//         loadProductData();
+//         loadInvoiceFeeding();
+//         loadMachine();
+//         loadtamount();
+//         setDate(datecache);
 
-        getCacheData();
+//         getCacheData();
         
-      }, []); 
-      const datecache = Cookies.get('dateCookies');
+//       }, []); 
+//       const datecache = Cookies.get('dateCookies');
     return (
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded'>  

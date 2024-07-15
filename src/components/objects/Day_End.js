@@ -39,130 +39,130 @@ export default function Tank({dbpath1, setDate}) {
   const [bspeedDifference, setbspeedDifference] = useState('0');
   const [hsdDifference, sethsdDifference] = useState('0');
 
-  const adjustDate = async (currentDate, adjustment) => {
-    // Parse the date string to a Date object
+//   const adjustDate = async (currentDate, adjustment) => {
+//     // Parse the date string to a Date object
   
-    let dateParts = currentDate.split('-');
-    let year = parseInt(dateParts[0], 10);
-    let month = parseInt(dateParts[1], 10) - 1;  // JavaScript months are 0-based
-    let day = parseInt(dateParts[2], 10);
+//     let dateParts = currentDate.split('-');
+//     let year = parseInt(dateParts[0], 10);
+//     let month = parseInt(dateParts[1], 10) - 1;  // JavaScript months are 0-based
+//     let day = parseInt(dateParts[2], 10);
 
-    let dateObject = new Date(year, month, day);
+//     let dateObject = new Date(year, month, day);
 
-    // Adjust the date
-    dateObject.setDate(dateObject.getDate() + adjustment);
+//     // Adjust the date
+//     dateObject.setDate(dateObject.getDate() + adjustment);
 
-    // Construct the adjusted date string in YYYY-MM-DD format
-    let adjustedYear = dateObject.getFullYear();
-    let adjustedMonth = (dateObject.getMonth() + 1).toString().padStart(2, '0');  // Convert 0-based month back to 1-based
-    let adjustedDay = dateObject.getDate().toString().padStart(2, '0');
-    let lastdate = `${adjustedYear}-${adjustedMonth}-${adjustedDay}`;
+//     // Construct the adjusted date string in YYYY-MM-DD format
+//     let adjustedYear = dateObject.getFullYear();
+//     let adjustedMonth = (dateObject.getMonth() + 1).toString().padStart(2, '0');  // Convert 0-based month back to 1-based
+//     let adjustedDay = dateObject.getDate().toString().padStart(2, '0');
+//     let lastdate = `${adjustedYear}-${adjustedMonth}-${adjustedDay}`;
     
 
-              let query1 = "SELECT * FROM rwt_day_start WHERE date='"+lastdate+"';";
+//               let query1 = "SELECT * FROM rwt_day_start WHERE date='"+lastdate+"';";
     
              
-              const url1 = dbpath1 + 'getDynamic.php';
-              let fData1 = new FormData();
-              fData1.append('query', query1);
+//               const url1 = dbpath1 + 'getDynamic.php';
+//               let fData1 = new FormData();
+//               fData1.append('query', query1);
                 
-              try {
-                  const response1 = await axios.post(url1, fData1);
+//               try {
+//                   const response1 = await axios.post(url1, fData1);
                   
-                  if (response1 && response1.data) {
-                      if (Array.isArray(response1.data.phpresult) && response1.data.phpresult.length > 0) {
-                          // Data is available
+//                   if (response1 && response1.data) {
+//                       if (Array.isArray(response1.data.phpresult) && response1.data.phpresult.length > 0) {
+//                           // Data is available
                         
-                          console.log(response1.data.phpresult);
-                          setamsLast(response1.data.phpresult[0].ms);
-                          setbspeedLast(response1.data.phpresult[0].speed);
-                          sethsdLast(response1.data.phpresult[0].hsd);
+//                           console.log(response1.data.phpresult);
+//                           setamsLast(response1.data.phpresult[0].ms);
+//                           setbspeedLast(response1.data.phpresult[0].speed);
+//                           sethsdLast(response1.data.phpresult[0].hsd);
                          
-                      } else {
-                          // Data is not available
-                      }
-                  }
-              } catch (error) {
-                  console.log("Please Select Proper Input");
-              }
+//                       } else {
+//                           // Data is not available
+//                       }
+//                   }
+//               } catch (error) {
+//                   console.log("Please Select Proper Input");
+//               }
 
-}
+// }
 
-const loadOtherExpenses = async () => {
+// const loadOtherExpenses = async () => {
 
-  let query="select * from rwt_daily_expenses where date = '"+datecache+"';";
+//   let query="select * from rwt_daily_expenses where date = '"+datecache+"';";
          
-     /* alert(query); */
-     const url = dbpath1 + 'getDynamic.php';
-     let fData = new FormData();
+//      /* alert(query); */
+//      const url = dbpath1 + 'getDynamic.php';
+//      let fData = new FormData();
 
-     fData.append('query', query);
+//      fData.append('query', query);
 
-         const response = await axios.post(url, fData);
+//          const response = await axios.post(url, fData);
          
-         if (response && response.data) {
+//          if (response && response.data) {
              
-             if (response.data.phpresult) {
-                 setOtherExpenses(response.data.phpresult); 
-                 console.log(response.data.phpresult);
-             }
-         }
+//              if (response.data.phpresult) {
+//                  setOtherExpenses(response.data.phpresult); 
+//                  console.log(response.data.phpresult);
+//              }
+//          }
   
-}
+// }
 
-const loadHandloanIncoming = async (value) => {
-  let query="SELECT * FROM rwt_handloan_transactions WHERE date = '"+datecache+"' AND particular= 'Recived';";
+// const loadHandloanIncoming = async (value) => {
+//   let query="SELECT * FROM rwt_handloan_transactions WHERE date = '"+datecache+"' AND particular= 'Recived';";
      
-  /* alert(query); */
-  const url = dbpath1 + 'getDynamic.php';
-  let fData = new FormData();
+//   /* alert(query); */
+//   const url = dbpath1 + 'getDynamic.php';
+//   let fData = new FormData();
 
-  fData.append('query', query);
+//   fData.append('query', query);
 
-  try {
-      const response = await axios.post(url, fData);
+//   try {
+//       const response = await axios.post(url, fData);
       
-      if (response && response.data) {
+//       if (response && response.data) {
           
-          if (response.data.phpresult) {
-              setHandloansIncoming(response.data.phpresult);
-            //  console.log(response.data.phpresult);
-               }
-      }
+//           if (response.data.phpresult) {
+//               setHandloansIncoming(response.data.phpresult);
+//             //  console.log(response.data.phpresult);
+//                }
+//       }
       
-  } catch (error) {
-      console.log("Please Select Proper Input");
-  }
-}
+//   } catch (error) {
+//       console.log("Please Select Proper Input");
+//   }
+// }
 
-const loadHandloanExpense= async (value) => {
-  let query="SELECT * FROM rwt_handloan_transactions WHERE date = '"+datecache+"' AND particular= 'Given';";
+// const loadHandloanExpense= async (value) => {
+//   let query="SELECT * FROM rwt_handloan_transactions WHERE date = '"+datecache+"' AND particular= 'Given';";
      
-  /* alert(query); */
-  const url = dbpath1 + 'getDynamic.php';
-  let fData = new FormData();
+//   /* alert(query); */
+//   const url = dbpath1 + 'getDynamic.php';
+//   let fData = new FormData();
 
-  fData.append('query', query);
+//   fData.append('query', query);
 
-  try {
-      const response = await axios.post(url, fData);
+//   try {
+//       const response = await axios.post(url, fData);
       
-      if (response && response.data) {
+//       if (response && response.data) {
           
-          if (response.data.phpresult) {
-              setHandloansExpense(response.data.phpresult);
-            //  console.log(response.data.phpresult);
-               }
-      }
+//           if (response.data.phpresult) {
+//               setHandloansExpense(response.data.phpresult);
+//             //  console.log(response.data.phpresult);
+//                }
+//       }
       
-  } catch (error) {
-      console.log("Please Select Proper Input");
-  }
-}
+//   } catch (error) {
+//       console.log("Please Select Proper Input");
+//   }
+// }
 
-useEffect(() => {
-  getDayStartData(datecache,-1);
- }, []); 
+// useEffect(() => {
+//   getDayStartData(datecache,-1);
+//  }, []); 
 
 
  const getData = () => {}
@@ -255,139 +255,139 @@ const getDayStartData = async (dateSelected, adjust) => {
       boxes.forEach(box => box.classList.remove('active'));
   });
 
-  const calcamsDifference = (value) => {
-    document.getElementById('savebtn').style.backgroundColor = 'red';
-    let temp=    parseFloat(value) - parseFloat(amsLast);
-    setamsDifference(temp.toFixed(2));
-    if(temp>=0)
-    {
-      document.getElementById('diffms').style.color = 'green';
-    }
-    else{
-      document.getElementById('diffms').style.color = 'red';
-    }
-  }
+  // const calcamsDifference = (value) => {
+  //   document.getElementById('savebtn').style.backgroundColor = 'red';
+  //   let temp=    parseFloat(value) - parseFloat(amsLast);
+  //   setamsDifference(temp.toFixed(2));
+  //   if(temp>=0)
+  //   {
+  //     document.getElementById('diffms').style.color = 'green';
+  //   }
+  //   else{
+  //     document.getElementById('diffms').style.color = 'red';
+  //   }
+  // }
 
-  const calcbspeedDifference = (value) => {
-    document.getElementById('savebtn').style.backgroundColor = 'red';
-    let temp=    parseFloat(value) - parseFloat(bspeedLast);
-    setbspeedDifference(temp.toFixed(2));
+  // const calcbspeedDifference = (value) => {
+  //   document.getElementById('savebtn').style.backgroundColor = 'red';
+  //   let temp=    parseFloat(value) - parseFloat(bspeedLast);
+  //   setbspeedDifference(temp.toFixed(2));
    
-    if(temp>=0)
-    {
-      document.getElementById('diffspeed').style.color = 'green';
-    }
-    else{
-      document.getElementById('diffspeed').style.color = 'red';
-    }
-  }
+  //   if(temp>=0)
+  //   {
+  //     document.getElementById('diffspeed').style.color = 'green';
+  //   }
+  //   else{
+  //     document.getElementById('diffspeed').style.color = 'red';
+  //   }
+  // }
 
-  const calchsdDifference = (value) => {
-    document.getElementById('savebtn').style.backgroundColor = 'red';
-    let temp= parseFloat(value) - parseFloat(hsdLast);
-    sethsdDifference(temp.toFixed(2));
-    if(temp>=0)
-    {
-      document.getElementById('diffhsd').style.color = 'green';
-    }
-    else{
-      document.getElementById('diffhsd').style.color = 'red';
-    }
-  }
+  // const calchsdDifference = (value) => {
+  //   document.getElementById('savebtn').style.backgroundColor = 'red';
+  //   let temp= parseFloat(value) - parseFloat(hsdLast);
+  //   sethsdDifference(temp.toFixed(2));
+  //   if(temp>=0)
+  //   {
+  //     document.getElementById('diffhsd').style.color = 'green';
+  //   }
+  //   else{
+  //     document.getElementById('diffhsd').style.color = 'red';
+  //   }
+  // }
 
-  const onOkay = () => {
-    document.getElementById('savepop').style.marginLeft = '-5000px';
-  }
+  // const onOkay = () => {
+  //   document.getElementById('savepop').style.marginLeft = '-5000px';
+  // }
 
-  const onAdd = async () =>{
+  // const onAdd = async () =>{
 
-    if (amsToday.length === 0) {
-      alert("A-MS been left blank!");
-    }   else if (bspeedToday.length === 0) {
-      alert("B-Speed has been left blank!");
-    }   else if (hsdToday.length === 0) {
-      alert("C-HSD has been left blank!");
-    }   else if (amsDifference.length === 0) {
-      alert("Difference Not Calculated");
-    } else if (bspeedDifference.length === 0) {
-      alert("Difference Not Calculated");
-    }else if (hsdDifference.length === 0) {
-      alert("Difference Not Calculated");
-    }  else{
+  //   if (amsToday.length === 0) {
+  //     alert("A-MS been left blank!");
+  //   }   else if (bspeedToday.length === 0) {
+  //     alert("B-Speed has been left blank!");
+  //   }   else if (hsdToday.length === 0) {
+  //     alert("C-HSD has been left blank!");
+  //   }   else if (amsDifference.length === 0) {
+  //     alert("Difference Not Calculated");
+  //   } else if (bspeedDifference.length === 0) {
+  //     alert("Difference Not Calculated");
+  //   }else if (hsdDifference.length === 0) {
+  //     alert("Difference Not Calculated");
+  //   }  else{
     
-    let query = "SELECT * FROM rwt_day_start WHERE date='"+datecache+"';";
+  //   let query = "SELECT * FROM rwt_day_start WHERE date='"+datecache+"';";
     
-    /* alert(query); */
-    const url = dbpath1 + 'getDynamic.php';
-    let fData = new FormData();
-    fData.append('query', query);
+  //   /* alert(query); */
+  //   const url = dbpath1 + 'getDynamic.php';
+  //   let fData = new FormData();
+  //   fData.append('query', query);
       
    
-        const response = await axios.post(url, fData);
+  //       const response = await axios.post(url, fData);
         
-        if (response && response.data) {
-            if (Array.isArray(response.data.phpresult) && response.data.phpresult.length > 0) {
-                // Data is available
-                let query="UPDATE `rwt_day_start` SET `ms` = '"+amsToday+"', `speed` = '"+bspeedToday+"', `hsd` = '"+hsdToday+"', `msdiff` = '"+amsDifference+"', `speeddiff` = '"+bspeedDifference+"', `hsddiff` = '"+hsdDifference+"' WHERE `date` = '"+datecache+"';";
+  //       if (response && response.data) {
+  //           if (Array.isArray(response.data.phpresult) && response.data.phpresult.length > 0) {
+  //               // Data is available
+  //               let query="UPDATE `rwt_day_start` SET `ms` = '"+amsToday+"', `speed` = '"+bspeedToday+"', `hsd` = '"+hsdToday+"', `msdiff` = '"+amsDifference+"', `speeddiff` = '"+bspeedDifference+"', `hsddiff` = '"+hsdDifference+"' WHERE `date` = '"+datecache+"';";
                    
-                const url = dbpath1+'delTank.php';
-                let fData = new FormData();
-                fData.append('query', query);
+  //               const url = dbpath1+'delTank.php';
+  //               let fData = new FormData();
+  //               fData.append('query', query);
                 
-                axios.post(url, fData)
-                    .then(response => {/* alert(response.data);  *//*  window.location.reload(); */})
-                    .catch(error => {
-                    console.log(error.toJSON());
-             });
+  //               axios.post(url, fData)
+  //                   .then(response => {/* alert(response.data);  *//*  window.location.reload(); */})
+  //                   .catch(error => {
+  //                   console.log(error.toJSON());
+  //            });
                
   
-            } else {
+  //           } else {
                
   
-                // Data is not available
+  //               // Data is not available
                
           
-                  let query="INSERT INTO `rwt_day_start` (`day_start_id`, `date`, `ms`, `speed`, `hsd`, `msdiff`, `speeddiff`, `hsddiff`) VALUES (NULL,'"+datecache+"',"+amsToday+","+bspeedToday+","+hsdToday+","+amsDifference+","+bspeedDifference+","+hsdDifference+");";
+  //                 let query="INSERT INTO `rwt_day_start` (`day_start_id`, `date`, `ms`, `speed`, `hsd`, `msdiff`, `speeddiff`, `hsddiff`) VALUES (NULL,'"+datecache+"',"+amsToday+","+bspeedToday+","+hsdToday+","+amsDifference+","+bspeedDifference+","+hsdDifference+");";
                    
-                   const url = dbpath1+'delTank.php';
-                   let fData = new FormData();
-                   fData.append('query', query);
+  //                  const url = dbpath1+'delTank.php';
+  //                  let fData = new FormData();
+  //                  fData.append('query', query);
                    
-                   axios.post(url, fData)
-                       .then(response => {/* alert(response.data); */  /* window.location.reload(); */})
-                       .catch(error => {
-                       console.log(error.toJSON());
-                });
-            }
-        }
-    }
-    document.getElementById('savepop').style.marginLeft = '100px';
-    document.getElementById('savepop').style.marginTop = '-400px';
-    document.getElementById('savebtn').style.backgroundColor = 'green';
-    } 
-    function convertDateFormat(inputDate) {
-      // Ensure inputDate is a valid string
-      if (typeof inputDate !== 'string') {
-        console.error('Invalid inputDate:', inputDate);
-        return '';
-      }
+  //                  axios.post(url, fData)
+  //                      .then(response => {/* alert(response.data); */  /* window.location.reload(); */})
+  //                      .catch(error => {
+  //                      console.log(error.toJSON());
+  //               });
+  //           }
+  //       }
+  //   }
+  //   document.getElementById('savepop').style.marginLeft = '100px';
+  //   document.getElementById('savepop').style.marginTop = '-400px';
+  //   document.getElementById('savebtn').style.backgroundColor = 'green';
+  //   } 
+  //   function convertDateFormat(inputDate) {
+  //     // Ensure inputDate is a valid string
+  //     if (typeof inputDate !== 'string') {
+  //       console.error('Invalid inputDate:', inputDate);
+  //       return '';
+  //     }
     
-      // Split the string into an array [yyyy, mm, dd]
-      let parts = inputDate.split('-');
+  //     // Split the string into an array [yyyy, mm, dd]
+  //     let parts = inputDate.split('-');
     
-      // Check if the split resulted in exactly 3 parts
-      if (parts.length !== 3) {
-        console.error('Invalid date format:', inputDate);
-        return '';
-      }
+  //     // Check if the split resulted in exactly 3 parts
+  //     if (parts.length !== 3) {
+  //       console.error('Invalid date format:', inputDate);
+  //       return '';
+  //     }
     
-      // Rearrange the array and join it back to a string
-      return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+  //     // Rearrange the array and join it back to a string
+  //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+  //   }
     
     // Example usage
-    const formattedDate = convertDateFormat('2023-06-26');
-    console.log(formattedDate); // Output: 26-06-2023
+    // const formattedDate = convertDateFormat('2023-06-26');
+//    console.log(formattedDate); // Output: 26-06-2023
     
   //   function convertDateFormat(inputDate) {
   //     // Split the string into an array [yyyy, mm, dd]
@@ -397,279 +397,279 @@ const getDayStartData = async (dateSelected, adjust) => {
   //     return parts[2] + '-' + parts[1] + '-' + parts[0];
   // }
 
-  const loadASaleMs = async () => {
-    let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'MS' AND date = '"+datecache+"'";
+  // const loadASaleMs = async () => {
+  //   let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'MS' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('asale1').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
-  const loadASaleSpeed = async () => {
-    let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'SPEED' AND date = '"+datecache+"'";
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('asale1').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
+  // const loadASaleSpeed = async () => {
+  //   let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'SPEED' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('asale2').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
-  const loadASaleHSD = async () => {
-    let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'HSD' AND date = '"+datecache+"'";
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('asale2').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
+  // const loadASaleHSD = async () => {
+  //   let query="SELECT sum(asale) as asum FROM `sale_fuels` WHERE product_name = 'HSD' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('asale3').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('asale3').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
 
-  const loadSaleAmountMs = async () => {
-    let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'MS' AND date = '"+datecache+"'";
+  // const loadSaleAmountMs = async () => {
+  //   let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'MS' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('saleamount1').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
-  const loadSaleAmountSpeed = async () => {
-    let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'SPEED' AND date = '"+datecache+"'";
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('saleamount1').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
+  // const loadSaleAmountSpeed = async () => {
+  //   let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'SPEED' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('saleamount2').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
-  const loadSaleAmountHSD = async () => {
-    let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'HSD' AND date = '"+datecache+"'";
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('saleamount2').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
+  // const loadSaleAmountHSD = async () => {
+  //   let query="SELECT sum(amount) as asum FROM `sale_fuels` WHERE product_name = 'HSD' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('saleamount3').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('saleamount3').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
 
-  const loadDeposit = async () => {
-    let query="SELECT sum(cr_amount) as asum FROM rwt_bank_statement WHERE instruments = 'By Cash' AND date = '"+datecache+"'";
+  // const loadDeposit = async () => {
+  //   let query="SELECT sum(cr_amount) as asum FROM rwt_bank_statement WHERE instruments = 'By Cash' AND date = '"+datecache+"'";
          
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('depositamount').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('depositamount').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
 
-  const loadPetroCardValue = async () => {
+  // const loadPetroCardValue = async () => {
 
-    let query="select sum(amount) as asum from petro_card_transaction where date = '"+datecache+"';";
+  //   let query="select sum(amount) as asum from petro_card_transaction where date = '"+datecache+"';";
            
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('petrocard').innerHTML = response.data.phpresult[0]['asum']; 
-                   console.log(response.data.phpresult);
-               }
-           }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('petrocard').innerHTML = response.data.phpresult[0]['asum']; 
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
     
-  }
+  // }
 
-  const loadWalletValue = async () => {
+  // const loadWalletValue = async () => {
 
-    let query="select sum(amount) as asum from rwt_wallet_transactions where date = '"+datecache+"';";
+  //   let query="select sum(amount) as asum from rwt_wallet_transactions where date = '"+datecache+"';";
            
-       /* alert(query); */
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('wallet').innerHTML = response.data.phpresult[0]['asum']; 
-                   console.log(response.data.phpresult);
-               }
-           }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('wallet').innerHTML = response.data.phpresult[0]['asum']; 
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
     
-  }
+  // }
 
-  const loadCreditSale = async (value) => {
-    let query="SELECT sum(amount) as asum FROM rwt_credit_client WHERE date = '"+datecache+"';";
+  // const loadCreditSale = async (value) => {
+  //   let query="SELECT sum(amount) as asum FROM rwt_credit_client WHERE date = '"+datecache+"';";
        
-    /* alert(query); */
-    const url = dbpath1 + 'getDynamic.php';
-    let fData = new FormData();
+  //   /* alert(query); */
+  //   const url = dbpath1 + 'getDynamic.php';
+  //   let fData = new FormData();
 
-    fData.append('query', query);
+  //   fData.append('query', query);
 
-    try {
-        const response = await axios.post(url, fData);
+  //   try {
+  //       const response = await axios.post(url, fData);
         
-        if (response && response.data) {
+  //       if (response && response.data) {
             
-            if (response.data.phpresult) {
-              document.getElementById('creditsale').innerHTML = response.data.phpresult[0]['asum']; 
-            }
-        }
+  //           if (response.data.phpresult) {
+  //             document.getElementById('creditsale').innerHTML = response.data.phpresult[0]['asum']; 
+  //           }
+  //       }
         
-    } catch (error) {
-        console.log("Please Select Proper Input");
-    }
-  }
+  //   } catch (error) {
+  //       console.log("Please Select Proper Input");
+  //   }
+  // }
 
 
-  const loadAdvanceReceipt = async () => {
-    let query="SELECT sum(cr_amount) as asum FROM rwt_bank_statement WHERE instruments = 'By Cash' AND date = '"+datecache+"'";
+  // const loadAdvanceReceipt = async () => {
+  //   let query="SELECT sum(cr_amount) as asum FROM rwt_bank_statement WHERE instruments = 'By Cash' AND date = '"+datecache+"'";
          
-       /* alert(query); */  
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */  
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   document.getElementById('depositamount').innerHTML = response.data.phpresult[0]['asum'];
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
+  //              if (response.data.phpresult) {
+  //                  document.getElementById('depositamount').innerHTML = response.data.phpresult[0]['asum'];
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
 
-  const loadAdvances = async () => {
-    let query="SELECT * FROM rwt_advances_transaction WHERE date = '"+datecache+"'";
+  // const loadAdvances = async () => {
+  //   let query="SELECT * FROM rwt_advances_transaction WHERE date = '"+datecache+"'";
          
-       /* alert(query); */  
-       const url = dbpath1 + 'getDynamic.php';
-       let fData = new FormData();
+  //      /* alert(query); */  
+  //      const url = dbpath1 + 'getDynamic.php';
+  //      let fData = new FormData();
 
-       fData.append('query', query);
+  //      fData.append('query', query);
 
-           const response = await axios.post(url, fData);
+  //          const response = await axios.post(url, fData);
            
-           if (response && response.data) {
+  //          if (response && response.data) {
                
-               if (response.data.phpresult) {
-                   setAdvances(response.data.phpresult);
-                   console.log(response.data.phpresult);
-               }
-           }
-  }
+  //              if (response.data.phpresult) {
+  //                  setAdvances(response.data.phpresult);
+  //                  console.log(response.data.phpresult);
+  //              }
+  //          }
+  // }
 
-  const totalIncome = () => {
+  // const totalIncome = () => {
     
-  }
+  // }
 
-  useEffect(() => {
+  // useEffect(() => {
        
-    loadSaleAmountMs();
-    loadSaleAmountSpeed();
-    loadSaleAmountHSD();
+  //   loadSaleAmountMs();
+  //   loadSaleAmountSpeed();
+  //   loadSaleAmountHSD();
 
-    loadASaleMs();
-    loadASaleSpeed();
-    loadASaleHSD();
+  //   loadASaleMs();
+  //   loadASaleSpeed();
+  //   loadASaleHSD();
 
-    loadDeposit();
+  //   loadDeposit();
 
-    loadAdvanceReceipt();
-    loadHandloanIncoming();
-    loadHandloanExpense();
-    loadPetroCardValue();
-    loadWalletValue();
-    loadCreditSale();
-    loadOtherExpenses();
-    loadAdvances();
+  //   loadAdvanceReceipt();
+  //   loadHandloanIncoming();
+  //   loadHandloanExpense();
+  //   loadPetroCardValue();
+  //   loadWalletValue();
+  //   loadCreditSale();
+  //   loadOtherExpenses();
+  //   loadAdvances();
 
-    setTimeout(totalIncome, 4000);
+  //   setTimeout(totalIncome, 4000);
 
-  }, []); 
+  // }, []); 
   const datecache = Cookies.get('dateCookies');
     return (
 
@@ -681,7 +681,9 @@ const getDayStartData = async (dateSelected, adjust) => {
 
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
             <h2 className='mt-3 text-center'> DAY BOOK</h2>
-            <b style={{fontSize:'20px'}}> Date : {convertDateFormat(datecache)}</b>
+            <b style={{fontSize:'20px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </b>
             <table class="table">
               <thead>
                 <tr class="table-dark" >

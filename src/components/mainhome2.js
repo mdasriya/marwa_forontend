@@ -1,23 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import New from "../objects/New"
-
 //import { TankModel } from "../../../../marwa_backend/models/tank.model";
 
 const MainHome = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [tank, setTank] = useState([]);
-  const [editTank, setEditTank] = useState({});
-
   const [machineOpen, setMachineOpen] = useState(false);
-  const [machine, setMachine] = useState([]);
-  const [editMachine, setEditMachine] = useState({});
 
+  const [tank, setTank] = useState([]);
+  const [machine, setMachine] = useState([]);
+  const [editTank, setEditTank] = useState({});
   const fetchTank = () => {
     axios
       .get("http://localhost:4000/tank")
       .then((res) => {
-        //   console.log("res", res.data);
+        console.log("res", res.data);
         setTank(res.data);
       })
       .catch((error) => {
@@ -60,15 +56,10 @@ const MainHome = () => {
     setEditTank({ ...editTank, [e.target.name]: e.target.value });
   };
 
-  const handleMachineEdit = (props) => {
-    setEditMachine(props);
+  const handleMachineEdit = () => {
     setMachineOpen(true);
   };
 
-  const handleEditMachineChange = (e) => {
-    setEditMachine({ ...editMachine, [e.target.name]: e.target.value });
-    console.log(editMachine);
-  };
   const handleEditSubmit = () => {
     console.log("edir", editTank);
     axios
@@ -82,27 +73,9 @@ const MainHome = () => {
         console.log(error.message);
       });
   };
-  //console.log("editMachine.product", editMachine.product);
-  const handleEditMachineSubmit = () => {
-  //  console.log("edir", editTank);
-    axios
-      .patch(
-        `http://localhost:4000/machine/update/${editMachine._id}`,
-        editMachine
-      )
-      .then((res) => {
-        console.log("res machine update", res.data);
-        setMachineOpen(false);
-        fetchMachine();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
 
   return (
     <>
- 
       <h1 className="font-bold text-lg p-3 mb-4 text-white rounded- bg-green-900 text-center w-full">
         TANK RECORDS LAYOUT
       </h1>
@@ -118,7 +91,7 @@ const MainHome = () => {
                   PRODUCT
                 </th>
                 <th class="px-4 py-4 text-center text-sm font-bold text-white uppercase tracking-wider">
-                  CAPACITY(in Ltr)
+                  CAPACITY
                 </th>
                 <th class="px-4 py-4 text-center text-sm font-bold text-white uppercase tracking-wider">
                   NO.OF NOZZLES
@@ -260,9 +233,6 @@ const MainHome = () => {
           </div>
         )}
       </section>
-      
-      <New />
-      {/* 2. machine modal start */}
 
       {machineOpen && (
         <div class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
@@ -294,10 +264,10 @@ const MainHome = () => {
                   DISPENSING UNIT NO
                 </labe>
                 <input
-                  value={editMachine.machineNo}
-                  onChange={(e) => handleEditMachineChange(e)}
+                  // value={editTank.tankNo}
+                  onChange={(e) => handleEditChange(e)}
                   type="number"
-                  name="machineNo"
+                  name="tankNo"
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
               </div>
@@ -305,9 +275,9 @@ const MainHome = () => {
               <div>
                 <labe class="text-gray-800 text-sm mb-2 block">MAKE</labe>
                 <input
-                  value={editMachine.make}
+                  // value={editTank.product}
                   name="product"
-                  onChange={(e) => handleEditMachineChange(e)}
+                  onChange={handleEditChange}
                   type="text"
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
@@ -316,9 +286,8 @@ const MainHome = () => {
               <div>
                 <labe class="text-gray-800 text-sm mb-2 block">SERIAL NO</labe>
                 <input
-                  value={editMachine.serialNo}
-                  name="serialNo"
-                  onChange={(e) => handleEditMachineChange(e)}
+                  // value={editTank.capacity}
+                  onChange={handleEditChange}
                   type="text"
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
@@ -329,10 +298,10 @@ const MainHome = () => {
                   CONNECTERD TANKS
                 </labe>
                 <input
-                  onChange={(e) => handleEditMachineChange(e)}
+                  onChange={handleEditChange}
                   type="number"
-                  name="connectedTank"
-                  value={editMachine.connectedTank}
+                  name="nozzels"
+                  // value={editTank.nozzels}
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
               </div>
@@ -340,10 +309,10 @@ const MainHome = () => {
               <div>
                 <labe class="text-gray-800 text-sm mb-2 block">PRODUCT</labe>
                 <input
-                  onChange={(e) => handleEditMachineChange(e)}
+                  onChange={handleEditChange}
                   type="text"
-                  name="product"
-                  value={editMachine.product}
+                  name="nozzels"
+                  // value={editTank.nozzels}
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
               </div>
@@ -353,10 +322,10 @@ const MainHome = () => {
                   NOZZLES IN MPD
                 </labe>
                 <input
-                  onChange={(e) => handleEditMachineChange(e)}
+                  onChange={handleEditChange}
                   type="number"
                   name="nozzels"
-                  value={editMachine.nozzlesInMPD}
+                  // value={editTank.nozzels}
                   class="px-4 py-3 bg-gray-100 w-full text-gray-800 text-sm border-none focus:outline-blue-600 focus:bg-transparent rounded-lg"
                 />
               </div>
@@ -372,7 +341,7 @@ const MainHome = () => {
                 <button
                   type="button"
                   class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue-600 hover:bg-blue-700"
-                  onClick={handleEditMachineSubmit}
+                  onClick={handleEditSubmit}
                 >
                   Submit
                 </button>
@@ -381,10 +350,7 @@ const MainHome = () => {
           </div>
         </div>
       )}
-      {/* 2. machine modal end */}
 
-
-      {/* 3. machine 1 section start */}
       <section className="machine-1">
         <div class="font-[sans-serif] overflow-x-auto">
           <table class="min-w-full bg-white border-1 border-gray-300">
@@ -395,7 +361,6 @@ const MainHome = () => {
                   {/* <span className="text-lg font-bold  font-bold rounded-full bg-white"> 1st </span>  */}
                 </th>
                 <th class="p-4 text-center text-sm font-large text-white text-uppercase"></th>
-
                 <th class="p-4 pr-4 text-sm font-large   text-white text-uppercase">
                   Side
                 </th>
@@ -414,200 +379,45 @@ const MainHome = () => {
             </thead>
 
             <tbody class="whitespace-nowrap">
-              {machine.length &&
-                machine.map((el) => {
-                  const machine1 = machine[0];
-    
-                  return (
-                    <>
-                      {/* row1 */}
-                      <tr key={machine1}>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          DISPENSING UNIT NO
-                        </td>
-                        <td
-                          name="machineNo"
-                          class="p-4 text-sm font-bold  font-bold"
-                        >
-                          {machine1.machineNo}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.sides[0]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[0].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[0].fuletype}
-                        </td>
+              {/* {machine.length >0 &&
+                machine.map((el)=>{
+                    return <>
+                     <tr key={el._id} class="even:bg-blue-50">
+                <td class="p-4 text-sm font-bold  font-bold">DISPENSING UNIT NO</td>
+                <td class="p-4 text-sm font-bold  font-bold">01 (DIESEL POINT) ={el.machineNo}</td>
+                <td class="p-4 text-sm font-bold  font-bold">1 ={el.sides}</td>
+                <td class="p-4 text-sm font-bold  font-bold">1 - A1  </td>
+                <td class="p-4">
+                 {el.nozzleLayout[0].A1}
+                </td>
+              </tr>}  */}
 
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit(el)}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      {/* row2 */}
-                      <tr key={machine1} class="even:bg-blue-100">
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          make
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.make}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.sides[0]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[1].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[1].fuletype}
-                        </td>
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit()}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
+              <tr class="even:bg-blue-50">
+                <td class="p-4 text-sm font-bold  font-bold  font-bold">
+                  DISPENSING UNIT NO
+                </td>
+                <td class="p-4 text-sm font-bold  font-bold  font-bold">
+                  01 (DIESEL POINT){" "}
+                </td>
+                <td class="p-4 text-sm font-bold  font-bold  font-bold">1 </td>
+                <td class="p-4 text-sm font-bold  font-bold  font-bold">
+                  1 - A1{" "}
+                </td>
+                <td class="p-4 font-bold">HSD</td>
+                <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
+                  <button
+                    class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
+                    onClick={() => handleMachineEdit()}
+                  >
+                    Edit
+                  </button>
+                  <button class="text-white bg-red-500 px-2 py-2 rounded-md">
+                    Delete
+                  </button>
+                </td>
+              </tr>
 
-                      {/* row3 */}
-                      <tr key={machine1}>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          serial no
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.serialNo}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.sides[0]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[2].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[2].fuletype}
-                        </td>
-
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit()}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/* row4 */}
-                      <tr key={machine1} class="even:bg-blue-100">
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          connected Tanks
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.connectedTank}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.sides[1]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[3].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[3].fuletype}
-                        </td>
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit()}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      {/* row5 */}
-                      <tr key={machine1}>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          product
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.product}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.sides[1]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[4].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[4].fuletype}
-                        </td>
-
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit()}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/* row6 */}
-                      <tr key={machine1} class="even:bg-blue-100">
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          nozzles In MPD
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.nozzlesInMPD}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold">
-                          {machine1.sides[1]}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[5].nozzlename}
-                        </td>
-                        <td class="p-4 text-sm font-bold  font-bold uppercase">
-                          {machine1.nozzleLayout[5].fuletype}
-                        </td>
-                        <td class="px-4 py-4 text-sm text-gray-800 font-extrabold">
-                          <button
-                            class="text-white bg-green-500 px-2 py-2 rounded-md mr-4"
-                            onClick={() => handleMachineEdit()}
-                          >
-                            Edit
-                          </button>
-                          <button class="text-white bg-red-500 px-2 py-2 rounded-md">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-
-              {/* <tr class="even:bg-blue-50">
+              <tr class="even:bg-blue-50">
                 <td class="p-4 text-sm font-bold  font-bold font-bold">MAKE</td>
                 <td class="p-4 text-sm font-bold  font-bold font-bold">
                   GILBARCO
@@ -693,9 +503,9 @@ const MainHome = () => {
                     Delete
                   </button>
                 </td>
-              </tr>  */}
+              </tr>
 
-              {/* <tr class="even:bg-blue-50">
+              <tr class="even:bg-blue-50">
                 <td class="p-4 text-sm font-bold  font-bold">NOZZLES IN MPD</td>
                 <td class="p-4 text-sm font-bold  font-bold">06</td>
                 <td class="p-4 text-sm font-bold  font-bold">2</td>
@@ -712,12 +522,11 @@ const MainHome = () => {
                     Delete
                   </button>
                 </td>
-              </tr> */}
+              </tr>
             </tbody>
           </table>
         </div>
       </section>
-      {/* 3. machine  1 section end */}
     </>
   );
 };

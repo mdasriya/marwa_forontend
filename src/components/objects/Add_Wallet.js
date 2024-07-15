@@ -25,134 +25,136 @@ export default function Add_Petro_Card({dbpath1}) {
 
     const [bankName, setBankName] = useState('');
 
-    const loadWallet = async () => {
+    // const loadWallet = async () => {
 
 
-      let query="select * from rwt_wallet";
+    //   let query="select * from rwt_wallet";
              
-      /*    alert(query); */
-         const url = dbpath1 + 'getDynamic.php';
-         let fData = new FormData();
+    //   /*    alert(query); */
+    //      const url = dbpath1 + 'getDynamic.php';
+    //      let fData = new FormData();
 
-         fData.append('query', query);
+    //      fData.append('query', query);
 
-             const response = await axios.post(url, fData);
+    //          const response = await axios.post(url, fData);
              
-             if (response && response.data) {
+    //          if (response && response.data) {
                  
-                 if (response.data.phpresult) {
-                     setWallet(response.data.phpresult); 
-                     console.log(response.data.phpresult);
-                 }
-             }
+    //              if (response.data.phpresult) {
+    //                  setWallet(response.data.phpresult); 
+    //                  console.log(response.data.phpresult);
+    //              }
+    //          }
 
              
-      let i=0;
-     /*  var elements = document.getElementsByClassName("ratehsd");
-      for ( i = 0; i < elements.length; i++) {
-          elements[i].value = dayStartRate[0]['hsd'];
-      } */
-      for(i=0;i<response.data.phpresult.length;i++)
-      {
-        try
-        {
-          console.log(i);
-        document.getElementById('mrp'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['amount'];
-        document.getElementById('pcs'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['pcs_per_box'];
-        }
-        catch{
-          console.log('catched expection');
-        }
-      }
-    }
+    //   let i=0;
+    //  /*  var elements = document.getElementsByClassName("ratehsd");
+    //   for ( i = 0; i < elements.length; i++) {
+    //       elements[i].value = dayStartRate[0]['hsd'];
+    //   } */
+    //   for(i=0;i<response.data.phpresult.length;i++)
+    //   {
+    //     try
+    //     {
+    //       console.log(i);
+    //     document.getElementById('mrp'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['amount'];
+    //     document.getElementById('pcs'+response.data.phpresult[i]['id']).value = response.data.phpresult[i]['pcs_per_box'];
+    //     }
+    //     catch{
+    //       console.log('catched expection');
+    //     }
+    //   }
+    // }
 
     const navigate = useNavigate();
 
-    const onAdd = () =>{
+    // const onAdd = () =>{
         
-      if (bankName.length === 0) {
-        alert("Bank Name has been left blank!");
-      }   else {
+    //   if (bankName.length === 0) {
+    //     alert("Bank Name has been left blank!");
+    //   }   else {
   
-        let query=("INSERT INTO `rwt_wallet` (`id`, `name`, `status`, `date`) VALUES (NULL, '"+bankName+"', 'Active', '"+datecache+"');");
-        /*  alert(query); */   
-         const url = dbpath1+'delTank.php';
-         let fData = new FormData();
-         fData.append('query', query);
+    //     let query=("INSERT INTO `rwt_wallet` (`id`, `name`, `status`, `date`) VALUES (NULL, '"+bankName+"', 'Active', '"+datecache+"');");
+    //     /*  alert(query); */   
+    //      const url = dbpath1+'delTank.php';
+    //      let fData = new FormData();
+    //      fData.append('query', query);
          
-         axios.post(url, fData)
-         .then(response => {alert(response.data);  window.location.reload();})
-             .catch(error => {
-             console.log(error.toJSON());
-      });
-    }
-    }
+    //      axios.post(url, fData)
+    //      .then(response => {alert(response.data);  window.location.reload();})
+    //          .catch(error => {
+    //          console.log(error.toJSON());
+    //   });
+    // }
+    // }
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_wallet` WHERE id = "+index+";";
+  //   const onDelete = async (index) => {
+  //     let query="DELETE FROM `rwt_wallet` WHERE id = "+index+";";
     
-      //alert(query);
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+  //     //alert(query);
+  //     const url = dbpath1+'delTank.php';
+  //     let fData = new FormData();
+  //     fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response =>{ alert(response.data); window.location.reload();})  
-          .catch(error => {
-          console.log(error.toJSON());
-          });
-  }
+  //     axios.post(url, fData)
+  //         .then(response =>{ alert(response.data); window.location.reload();})  
+  //         .catch(error => {
+  //         console.log(error.toJSON());
+  //         });
+  // }
 
-  const setStatus = async (index,pstatus) => {
-    let query="UPDATE `rwt_wallet` SET `status` = '"+pstatus+"' WHERE `id` = '"+index+"';";
+//   const setStatus = async (index,pstatus) => {
+//     let query="UPDATE `rwt_wallet` SET `status` = '"+pstatus+"' WHERE `id` = '"+index+"';";
   
-    /* alert(query); */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//     /* alert(query); */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response =>{ alert(response.data); window.location.reload();})  
-        .catch(error => {
-        console.log(error.toJSON());
-        });
-}
+//     axios.post(url, fData)
+//         .then(response =>{ alert(response.data); window.location.reload();})  
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
+// }
 
-  const onSave = async (index) => {
-    let query="UPDATE `rwt_oil_pouches` SET `pcs_per_box` = '"+ document.getElementById('pcs'+index).value+"', `amount` = '"+document.getElementById('mrp'+index).value+"' WHERE `id` = '"+index+"';";
+//   const onSave = async (index) => {
+//     let query="UPDATE `rwt_oil_pouches` SET `pcs_per_box` = '"+ document.getElementById('pcs'+index).value+"', `amount` = '"+document.getElementById('mrp'+index).value+"' WHERE `id` = '"+index+"';";
   
-    /* alert(query); */
-    const url = dbpath1+'delTank.php';
-    let fData = new FormData();
-    fData.append('query', query);
+//     /* alert(query); */
+//     const url = dbpath1+'delTank.php';
+//     let fData = new FormData();
+//     fData.append('query', query);
     
-    axios.post(url, fData)
-        .then(response =>{ alert(response.data);/*  window.location.reload(); */})
-        .catch(error => {
-        console.log(error.toJSON());
-        });
-}
+//     axios.post(url, fData)
+//         .then(response =>{ alert(response.data);/*  window.location.reload(); */})
+//         .catch(error => {
+//         console.log(error.toJSON());
+//         });
+// }
   
-    useEffect(() => {
-       loadWallet();
+    // useEffect(() => {
+    //    loadWallet();
       
-      }, []); 
+    //   }, []); 
       const datecache = Cookies.get('dateCookies');
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
     return (
 
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'>Add Wallet</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </span>
             <div>
                 <br></br>
                 <table class="table">
@@ -168,7 +170,9 @@ export default function Add_Petro_Card({dbpath1}) {
                                 <input type="text" class="form-control editableInput bigFontWeight" placeholder="Bank Name" onChange={(e) => setBankName(e.target.value)} />
                             </td>
                            
-                            <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={onAdd}
+                            >ADD</button></td>
                             
                         </tr>   
                     </tbody>
@@ -203,9 +207,15 @@ export default function Add_Petro_Card({dbpath1}) {
                                        {/*  <button type="button" id={"tank"+res.tank_no} class="btn btn-primary">Edit</button> &nbsp;
                                         <button type="button" id={"tank"+   res.tank_no} class="btn btn-primary">Close</button> &nbsp;
                                           <button type="button" id={"tank"+res.tank_no} class="btn btn-primary">Open</button> &nbsp; */}
-                                        <button type="button" id={"tank"+res.id} class="btn btn-danger " onClick={() => onDelete(res.id)}>Delete</button>&nbsp;
-                                        <button type="button" id={"tank"+res.id} class="btn btn-info " onClick={() => setStatus(res.id,'Active')}>Open</button>&nbsp;
-                                        <button type="button" id={"tank"+res.id} class="btn btn-warning " onClick={() => setStatus(res.id,'Closed')}>Close</button>
+                                        <button type="button" id={"tank"+res.id} class="btn btn-danger "
+                                        //  onClick={() => onDelete(res.id)}
+                                         >Delete</button>&nbsp;
+                                        <button type="button" id={"tank"+res.id} class="btn btn-info "
+                                        //  onClick={() => setStatus(res.id,'Active')}
+                                         >Open</button>&nbsp;
+                                        <button type="button" id={"tank"+res.id} class="btn btn-warning " 
+                                        // onClick={() => setStatus(res.id,'Closed')}
+                                        >Close</button>
                                     </td>
                                 </tr>   
                             )}

@@ -25,110 +25,112 @@ const [inputProduct, setInputProduct] = useState({});
 const [inputNozzlesInMpd, setInputNozzlesInMpd] = useState({});
 
 
-const loadClients = async () => {
-  let query="SELECT * FROM `rwt_client`;";
-        /*  
-            alert(query); */
-            const url = dbpath1 + 'getDynamic.php';
-            let fData = new FormData();
+// const loadClients = async () => {
+//   let query="SELECT * FROM `rwt_client`;";
+//         /*  
+//             alert(query); */
+//             const url = dbpath1 + 'getDynamic.php';
+//             let fData = new FormData();
 
-            fData.append('query', query);
+//             fData.append('query', query);
 
-            try {
-                const response = await axios.post(url, fData);
+//             try {
+//                 const response = await axios.post(url, fData);
                 
-                if (response && response.data) {
+//                 if (response && response.data) {
                     
-                    if (response.data.phpresult) {
-                        setClients(response.data.phpresult); 
-                        console.log(response.data.phpresult);
-                    }
-                }
-            } catch (error) {
-                console.log("Please Select Proper Input");
-            }
+//                     if (response.data.phpresult) {
+//                         setClients(response.data.phpresult); 
+//                         console.log(response.data.phpresult);
+//                     }
+//                 }
+//             } catch (error) {
+//                 console.log("Please Select Proper Input");
+//             }
 
 
-        }
+//         }
 
     const navigate = useNavigate();
     const datecache = Cookies.get('dateCookies');
-    const onAdd = () =>{
+    // const onAdd = () =>{
         
-        if (party_name.length === 0) {
-            alert("Party Name has been left blank!");
-          }   else if (contact_no.length === 0) {
-            alert("Contact No has been left blank!");
-          }   else if (remarks.length === 0) {
-            alert("Remarks has been left blank!");
-          }  else {
-            {
+    //     if (party_name.length === 0) {
+    //         alert("Party Name has been left blank!");
+    //       }   else if (contact_no.length === 0) {
+    //         alert("Contact No has been left blank!");
+    //       }   else if (remarks.length === 0) {
+    //         alert("Remarks has been left blank!");
+    //       }  else {
+    //         {
         
-              const url = dbpath1+'delTank.php';
+    //           const url = dbpath1+'delTank.php';
   
-              var query = "INSERT INTO `rwt_client` (`client_id`, `party_name`, `contact_no`, `remarks`, `amount`) VALUES (NULL, '"+party_name+"', '"+contact_no+"', '"+remarks+"', '"+0+"');";
+    //           var query = "INSERT INTO `rwt_client` (`client_id`, `party_name`, `contact_no`, `remarks`, `amount`) VALUES (NULL, '"+party_name+"', '"+contact_no+"', '"+remarks+"', '"+0+"');";
   
-              let fData = new FormData();
-              fData.append('query', query);
-              axios.post(url, fData)
-                .then(response =>{ alert(response.data); window.location.reload();})
-                .catch(error => {
-                  console.log(error.toJSON()); 
-            }); 
-          }
-          loadClients();
+    //           let fData = new FormData();
+    //           fData.append('query', query);
+    //           axios.post(url, fData)
+    //             .then(response =>{ alert(response.data); window.location.reload();})
+    //             .catch(error => {
+    //               console.log(error.toJSON()); 
+    //         }); 
+    //       }
+    //       loadClients();
             
-        }
-    }
+    //     }
+    // }
 
-    useEffect(() => {
-       loadClients();
-      }, []); 
+    // useEffect(() => {
+    //    loadClients();
+    //   }, []); 
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
     
 
-    const onSave = async (index) => {
-        let query="UPDATE pupc_machines SET dispensing_unit_no = '"+document.getElementById("inputDispensingUnitNo"+index).value+"', make = '"+document.getElementById("inputMake"+index).value+"', serial_no = '"+document.getElementById("inputSerialNo"+index).value+"', connected_tanks = '"+document.getElementById("inputConnectedTanks"+index).value+"', product = '"+document.getElementById("inputProduct"+index).value+"', nozzles_in_mpd = '"+document.getElementById("inputNozzlesInMpd"+index).value+"' WHERE machine_id = "+index;
-        /* alert(query); */
-        const url = dbpath1+'delTank.php';
-        let fData = new FormData();
-        fData.append('query', query);
+    // const onSave = async (index) => {
+    //     let query="UPDATE pupc_machines SET dispensing_unit_no = '"+document.getElementById("inputDispensingUnitNo"+index).value+"', make = '"+document.getElementById("inputMake"+index).value+"', serial_no = '"+document.getElementById("inputSerialNo"+index).value+"', connected_tanks = '"+document.getElementById("inputConnectedTanks"+index).value+"', product = '"+document.getElementById("inputProduct"+index).value+"', nozzles_in_mpd = '"+document.getElementById("inputNozzlesInMpd"+index).value+"' WHERE machine_id = "+index;
+    //     /* alert(query); */
+    //     const url = dbpath1+'delTank.php';
+    //     let fData = new FormData();
+    //     fData.append('query', query);
         
-        axios.post(url, fData)
-            .then(response => alert(response.data))
-            .catch(error => {
-            console.log(error.toJSON());
-            });
-    }
+    //     axios.post(url, fData)
+    //         .then(response => alert(response.data))
+    //         .catch(error => {
+    //         console.log(error.toJSON());
+    //         });
+    // }
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_client` WHERE client_id = "+index+";";
+//     const onDelete = async (index) => {
+//       let query="DELETE FROM `rwt_client` WHERE client_id = "+index+";";
     
-      /* alert(query); */
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+//       /* alert(query); */
+//       const url = dbpath1+'delTank.php';
+//       let fData = new FormData();
+//       fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response =>{ alert(response.data); window.location.reload();})
-          .catch(error => {
-          console.log(error.toJSON());
-          });
-  }
+//       axios.post(url, fData)
+//           .then(response =>{ alert(response.data); window.location.reload();})
+//           .catch(error => {
+//           console.log(error.toJSON());
+//           });
+//   }
     return (
 
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5 bg-body-tertiary rounded bigFontWeight'>   
       
             <h2 className='mt-3 text-center'>Add Client</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+                 {/* {convertDateFormat(datecache)} */}
+                 </span>
             <div>
                 <br></br>
                 <table class="table" style={{width:'900px'}}>
@@ -151,7 +153,9 @@ const loadClients = async () => {
                             <td><input type="text" class="form-control  editableInput bigFontWeight" placeholder="Remarks" onChange={(e) => setRemarks(e.target.value)} /></td>
                             {/* <td><input type="text" class="form-control  editableInput bigFontWeight" placeholder="Amount" onChange={(e) => setAmount(e.target.value)} /></td>
                             */}
-                            <td><button type="button" class="btn btn-primary" onClick={onAdd}>ADD</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={onAdd}
+                            >ADD</button></td>
                         </tr>   
                     </tbody>
                 </table>    
@@ -182,7 +186,9 @@ const loadClients = async () => {
                                     {/* <button type="button" id={"tank"+res.machine_id} class="btn btn-primary " onClick={() => onSave(res.machine_id)}>Save</button> &nbsp;
                                      */}    {/* <button type="button" id={"tank"+res.machine_id} class="btn btn-primary">Close</button> &nbsp;
                                         <button type="button" id={"tank"+res.machine_id} class="btn btn-primary">Open</button> &nbsp; */}
-                                        <button type="button" id={"tank"+res.client_id} class="btn btn-danger " onClick={() => onDelete(res.client_id)}>Delete</button>
+                                        <button type="button" id={"tank"+res.client_id} class="btn btn-danger "
+                                        //  onClick={() => onDelete(res.client_id)}
+                                         >Delete</button>
                                     </td>
                                 </tr>
                             )}

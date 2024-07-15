@@ -160,25 +160,27 @@ export default function CreditClientReport({dbpath1}) {
         });
 }
   
-    useEffect(() => {
-       loadOilProducts();
+    // useEffect(() => {
+    //    loadOilProducts();
       
-      }, []); 
+    //   }, []); 
       const datecache = Cookies.get('dateCookies');
 
-      function convertDateFormat(inputDate) {
-        // Split the string into an array [yyyy, mm, dd]
-        let parts = inputDate.split('-');
+    //   function convertDateFormat(inputDate) {
+    //     // Split the string into an array [yyyy, mm, dd]
+    //     let parts = inputDate.split('-');
     
-        // Rearrange the array and join it back to a string
-        return parts[2] + '-' + parts[1] + '-' + parts[0];
-    }
+    //     // Rearrange the array and join it back to a string
+    //     return parts[2] + '-' + parts[1] + '-' + parts[0];
+    // }
 
     return (
     <>
         <div className='tankMainDiv shadow-lg p-3 mb-5  bg-body-tertiary rounded bigFontWeight'>   
             <h2 className='mt-3 text-center'>Bank Statements</h2>
-            <span style={{fontSize:'22px'}}> Date : {convertDateFormat(datecache)}</span>
+            <span style={{fontSize:'22px'}}> Date :
+               {/* {convertDateFormat(datecache)} */}
+               </span>
             <div>
                 <br></br><br></br>
                 <table class="table" style={{width:'700px', marginLeft:'20%'}}>
@@ -201,7 +203,9 @@ export default function CreditClientReport({dbpath1}) {
                             </select> */} 
                             Bank Wise Statements (Monthly)
                             </td>
-                            <td><button type="button" class="btn btn-primary" onClick={report1}>Generate Report</button></td>
+                            <td><button type="button" class="btn btn-primary" 
+                            // onClick={report1}
+                            >Generate Report</button></td>
                         </tr>   
                      {/*    <tr>
                             <td> 
