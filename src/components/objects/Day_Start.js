@@ -8,27 +8,21 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { get } from "react-hook-form";
-export default function Tank({ dbpath1, setDate }) {
-  const isUserLoggedIn = Cookies.get("dateCookies");
+export default function Tankd({ dbpath1, setDate }) {
 
-  const setCookies = (e) => {
-    Cookies.set("dateCookies", e);
-    setTimeout(function () {
-      clacddifamsstart();
-      clacddifbspeedstart();
-      clacddifhsdstart();
-    }, 1000);
-  };
 
-  const [amsToday, setamsToday] = useState("");
-  const [bspeedToday, setbspeedToday] = useState("");
-  const [hsdToday, sethsdToday] = useState("");
+
+  const [amsToday, setamsToday] = useState([]);
+  const [bspeedToday, setbspeedToday] = useState([]);
+  const [hsdToday, sethsdToday] = useState([]);
+
+  const [dateStart,setDateStart] = useState([]);
 
   const [lastDayData, setLastDayData] = useState([]);
 
   const [conditionType, setConditionType] = useState("");
 
-  const [amsLast, setamsLast] = useState("");
+  const [amsLast, setamsLast] = useState([]);
   const [bspeedLast, setbspeedLast] = useState("");
   const [hsdLast, sethsdLast] = useState("");
 
@@ -36,325 +30,114 @@ export default function Tank({ dbpath1, setDate }) {
   const [bspeedDifference, setbspeedDifference] = useState("0");
   const [hsdDifference, sethsdDifference] = useState("0");
 
-  const adjustDate = async (currentDate, adjustment) => {
-    // Parse the date string to a Date object
-    try {
-      let dateParts = currentDate.split("-");
-      let year = parseInt(dateParts[0], 10);
-      let month = parseInt(dateParts[1], 10) - 1; // JavaScript months are 0-based
-      let day = parseInt(dateParts[2], 10);
+  const [machineOpen, setMachineOpen] = useState(false);
+  const [machineLayout, setMachineLayout] = useState([]);
+  const [editMachineLayout, setEditMachineLayout] = useState({});
 
-      let dateObject = new Date(year, month, day);
 
-      // Adjust the date
-      dateObject.setDate(dateObject.getDate() + adjustment);
+  const fetchMs = () => {
+    axios
+      .get("http://localhost:4000/ms")
+      .then((res) => {
+        console.log("res", res.data[0].reading);
+        setamsToday(res.data[0].reading);
+        setamsLast(res.data[1].reading)
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+console.log("typeof amsToday",typeof amsLast)
+  const fetchSpeed = () => {
+    axios
+      .get("http://localhost:4000/speed")
+      .then((res) => {
+        console.log("res speed",res.data[0]);
+        setbspeedToday(res.data[0].reading);
+        setbspeedLast(res.data[1].reading)
 
-      // Construct the adjusted date string in YYYY-MM-DD format
-      let adjustedYear = dateObject.getFullYear();
-      let adjustedMonth = (dateObject.getMonth() + 1)
-        .toString()
-        .padStart(2, "0"); // Convert 0-based month back to 1-based
-      let adjustedDay = dateObject.getDate().toString().padStart(2, "0");
-      let lastdate = `${adjustedYear}-${adjustedMonth}-${adjustedDay}`;
-
-      let query1 = "SELECT * FROM rwt_day_start WHERE date='" + lastdate + "';";
-
-      const url1 = dbpath1 + "getDynamic.php";
-      let fData1 = new FormData();
-      fData1.append("query", query1);
-
-      const response1 = await axios.post(url1, fData1);
-
-      if (response1 && response1.data) {
-        if (
-          Array.isArray(response1.data.phpresult) &&
-          response1.data.phpresult.length > 0
-        ) {
-          // Data is available
-
-          console.log(response1.data.phpresult);
-          setamsLast(response1.data.phpresult[0].ms);
-          setbspeedLast(response1.data.phpresult[0].speed);
-          sethsdLast(response1.data.phpresult[0].hsd);
-        } else {
-          // Data is not available
-        }
-      }
-    } catch (error) {
-      console.log("Please Select Proper Input");
-    }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
+  const fetchHsd = () => {
+    axios
+      .get("http://localhost:4000/hsd")
+      .then((res) => {
+        console.log("res.data", res.data[0]);
+        sethsdToday(res.data[0].reading);
+        setDateStart(res.data[0].date);
+        sethsdLast(res.data[1].reading)
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  console.log("dateStart",dateStart)
+
+  
+  useEffect(() => {
+    fetchMs();
+    fetchSpeed();
+    fetchHsd()
+  }, []);
+
+
+ 
   useEffect(() => {
     try {
-      adjustDate(datecache, -1);
-
-      getDayStartData(datecache, -1);
-      setTimeout(function () {
-        clacddifamsstart();
-        clacddifbspeedstart();
-        clacddifhsdstart();
-      }, 2000);
+    
     } catch {
       console.log("");
     }
   }, []);
 
-  const clacddifamsstart = () => {
-    var amt = document.getElementById("amsToday").value;
-    var aml = document.getElementById("amsLast").value;
 
-    let temp = parseFloat(amt) - parseFloat(aml);
-    //alert(parseFloat(amt) +" - "+ parseFloat(aml)+" = "+temp+" -> "+3);
-    setamsDifference(temp.toFixed(2));
-    if (temp >= 0) {
-      document.getElementById("diffms").style.color = "green";
-    } else {
-      document.getElementById("diffms").style.color = "red";
-    }
-  };
-  const clacddifbspeedstart = () => {
-    var amt = document.getElementById("bspeedToday").value;
-    var aml = document.getElementById("bspeedLast").value;
 
-    let temp = parseFloat(amt) - parseFloat(aml);
-    // alert(parseFloat(amt) +" - "+ parseFloat(aml)+" = "+temp+" -> "+3);
-    setbspeedDifference(temp.toFixed(2));
-    if (temp >= 0) {
-      document.getElementById("diffspeed").style.color = "green";
-    } else {
-      document.getElementById("diffspeed").style.color = "red";
-    }
-  };
-  const clacddifhsdstart = () => {
-    var amt = document.getElementById("hsdToday").value;
-    var aml = document.getElementById("hsdLast").value;
+  function getTodaysDate() {
+    const today = new Date();
+  //  console.log(today)
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const day = today.getDate().toString().padStart(2, '0');
+    
+    return `${day}-${month}-${year}`;
+}
+getTodaysDate();
 
-    let temp = parseFloat(amt) - parseFloat(aml);
-    //alert(parseFloat(amt) +" - "+ parseFloat(aml)+" = "+temp+" -> "+3);
-    sethsdDifference(temp.toFixed(2));
-    if (temp >= 0) {
-      document.getElementById("diffhsd").style.color = "green";
-    } else {
-      document.getElementById("diffhsd").style.color = "red";
-    }
-  };
-  const getDayStartData = async (dateSelected, adjust) => {
-    adjustDate(dateSelected, -1);
-    let query =
-      "SELECT * FROM rwt_day_start WHERE date='" + dateSelected + "';";
 
-    /* alert(query); */
-    const url = dbpath1 + "getDynamic.php";
-    let fData = new FormData();
-    fData.append("query", query);
+// Utility function to format the date
+function formatDate(dateString) {
+  const date = new Date(dateString);
 
-    try {
-      const response = await axios.post(url, fData);
+  const monthNames = [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+  ];
 
-      if (response && response.data) {
-        if (
-          Array.isArray(response.data.phpresult) &&
-          response.data.phpresult.length > 0
-        ) {
-          // Data is available
+  const month = monthNames[date.getMonth()]; // getMonth() returns a zero-based index
+  const day = date.getDate();
 
-          console.log(response.data.phpresult);
-          setamsToday(response.data.phpresult[0]["ms"]);
-          setbspeedToday(response.data.phpresult[0]["speed"]);
-          sethsdToday(response.data.phpresult[0]["hsd"]);
+  return `${month} ${day}`;
+}
 
-          /*   setTimeout(function() {
-                calcamsDifference(response.data.phpresult[0]['ms'],2);
-              }, 5000);  */
-          /* calcbspeedDifference(response.data.phpresult[0]['speed']);
-             
-              calchsdDifference(response.data.phpresult[0]['hsd']); */
+//formatDate("Mon Jul 14 2024 14:38:34 GMT+0530 (India Standard Time)");
+//console.log(formatDate("Mon Jul 14 2024 14:38:34 GMT+0530 (India Standard Time)"));
+//setDateStart(formatDate("Mon Jul 14 2024 14:38:34 GMT+0530 (India Standard Time"));
+//console.log(dateFinalStart)
+//let dateFinalStart = (formatDate(dateStart))
 
-          //adjustDate(dateSelected,-1);
-        } else {
-          setamsToday("");
-          setbspeedToday("");
-          sethsdToday("");
-          setamsDifference(0);
-          setbspeedDifference(0);
-          sethsdDifference(0);
-          adjustDate(dateSelected, -1);
 
-          // Data is not available
-        }
-      }
-    } catch (error) {
-      console.log("Please Select Proper Input");
-    }
-  };
 
-  const boxes = document.querySelectorAll(".inputDivPrice");
 
-  // Attach the event listener to each box
-  boxes.forEach(function (box) {
-    box.addEventListener("click", function (event) {
-      // First, remove 'active' class from all boxes
-      boxes.forEach((b) => b.classList.remove("active"));
 
-      // Then, add the 'active' class to the clicked box
-      event.currentTarget.classList.add("active");
 
-      // Stop the event from bubbling up to the document
-      event.stopPropagation();
-    });
-  });
 
-  // Remove the 'active' class from all boxes when clicking outside
-  document.addEventListener("click", function () {
-    boxes.forEach((box) => box.classList.remove("active"));
-  });
 
-  const calcamsDifference = (value, flag) => {
-    document.getElementById("savebtn").style.backgroundColor = "green";
-    document.getElementById("savebtn1").innerHTML = "Save";
 
-    let temp = parseFloat(value) - parseFloat(amsLast);
-    setamsDifference(temp.toFixed(2));
-    if (temp >= 0) {
-      document.getElementById("diffms").style.color = "green";
-    } else {
-      document.getElementById("diffms").style.color = "red";
-    }
-  };
-
-  const calcbspeedDifference = (value) => {
-    document.getElementById("savebtn").style.backgroundColor = "green";
-    document.getElementById("savebtn1").innerHTML = "Save";
-    let temp = parseFloat(value) - parseFloat(bspeedLast);
-    setbspeedDifference(temp.toFixed(2));
-
-    if (temp >= 0) {
-      document.getElementById("diffspeed").style.color = "green";
-    } else {
-      document.getElementById("diffspeed").style.color = "red";
-    }
-  };
-
-  const calchsdDifference = (value) => {
-    document.getElementById("savebtn").style.backgroundColor = "green";
-    document.getElementById("savebtn1").innerHTML = "Save";
-    let temp = parseFloat(value) - parseFloat(hsdLast);
-    sethsdDifference(temp.toFixed(2));
-    if (temp >= 0) {
-      document.getElementById("diffhsd").style.color = "green";
-    } else {
-      document.getElementById("diffhsd").style.color = "red";
-    }
-  };
-
-  const onOkay = () => {
-    document.getElementById("savepop").style.marginLeft = "-5000px";
-  };
-
-  // const onAdd = async () => {
-  //   if (amsToday.length === 0) {
-  //     alert("A-MS been left blank!");
-  //   } else if (bspeedToday.length === 0) {
-  //     alert("B-Speed has been left blank!");
-  //   } else if (hsdToday.length === 0) {
-  //     alert("C-HSD has been left blank!");
-  //   } else if (amsDifference.length === 0) {
-  //     alert("Difference Not Calculated");
-  //   } else if (bspeedDifference.length === 0) {
-  //     alert("Difference Not Calculated");
-  //   } else if (hsdDifference.length === 0) {
-  //     alert("Difference Not Calculated");
-  //   } else {
-  //     let query = "SELECT * FROM rwt_day_start WHERE date='" + datecache + "';";
-
-  //     /* alert(query); */
-  //     const url = dbpath1 + "getDynamic.php";
-  //     let fData = new FormData();
-  //     fData.append("query", query);
-
-  //     const response = await axios.post(url, fData);
-
-  //     if (response && response.data) {
-  //       document.getElementById("savebtn").style.backgroundColor = "red";
-  //       document.getElementById("savebtn1").innerHTML = "Saved";
-  //       if (
-  //         Array.isArray(response.data.phpresult) &&
-  //         response.data.phpresult.length > 0
-  //       ) {
-  //         // Data is available
-  //         let query =
-  //           "UPDATE `rwt_day_start` SET `ms` = '" +
-  //           amsToday +
-  //           "', `speed` = '" +
-  //           bspeedToday +
-  //           "', `hsd` = '" +
-  //           hsdToday +
-  //           "', `msdiff` = '" +
-  //           amsDifference +
-  //           "', `speeddiff` = '" +
-  //           bspeedDifference +
-  //           "', `hsddiff` = '" +
-  //           hsdDifference +
-  //           "' WHERE `date` = '" +
-  //           datecache +
-  //           "';";
-
-  //         const url = dbpath1 + "delTank.php";
-  //         let fData = new FormData();
-  //         fData.append("query", query);
-
-  //         axios
-  //           .post(url, fData)
-  //           .then((response) => {
-  //             /* alert(response.data);  */
-  //             /*  window.location.reload(); */
-  //           })
-  //           .catch((error) => {
-  //             console.log(error.toJSON());
-  //           });
-  //       } else {
-  //         // Data is not available
-
-  //         let query =
-  //           "INSERT INTO `rwt_day_start` (`day_start_id`, `date`, `ms`, `speed`, `hsd`, `msdiff`, `speeddiff`, `hsddiff`) VALUES (NULL,'" +
-  //           datecache +
-  //           "'," +
-  //           amsToday +
-  //           "," +
-  //           bspeedToday +
-  //           "," +
-  //           hsdToday +
-  //           "," +
-  //           amsDifference +
-  //           "," +
-  //           bspeedDifference +
-  //           "," +
-  //           hsdDifference +
-  //           ");";
-
-  //         const url = dbpath1 + "delTank.php";
-  //         let fData = new FormData();
-  //         fData.append("query", query);
-
-  //         axios
-  //           .post(url, fData)
-  //           .then((response) => {
-  //             /* alert(response.data); */
-  //             /* window.location.reload(); */
-  //           })
-  //           .catch((error) => {
-  //             console.log(error.toJSON());
-  //           });
-  //       }
-  //     }
-  //   }
-  //   document.getElementById("savepop").style.marginLeft = "100px";
-  //   document.getElementById("savepop").style.marginTop = "-400px";
-  // };
-
-  const datecache = Cookies.get("dateCookies");
-  console.log(datecache)
   return (
     <>
       <center>
@@ -367,8 +150,8 @@ export default function Tank({ dbpath1, setDate }) {
                 <span style={{ fontSize: "26px" }}> Reading Day : </span>
               </h5>
               <input
-                type="date"
-                value={datecache}
+                // type="date"
+                 value={getTodaysDate()}
                 style={{
                   width: "200px",
                   marginLeft: "20px",
@@ -378,11 +161,11 @@ export default function Tank({ dbpath1, setDate }) {
                 }}
                 class="form-control"
                 id="dateinput"
-                onChange={(e) => {
-                  setDate(e.target.value);
-                  setCookies(e.target.value);
-                  getDayStartData(e.target.value, -1);
-                }}
+                // onChange={(e) => {
+                //   setDate(e.target.value);
+                //   setCookies(e.target.value);
+                //   getDayStartData(e.target.value, -1);
+                // }}
                 pattern="\d{4}-\d{2}-\d{2}"
               ></input>
             </div>
@@ -398,13 +181,12 @@ export default function Tank({ dbpath1, setDate }) {
                     <br></br>
                     Reading Day
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={amsToday}
+                       value={amsToday}
                       id="amsToday"
                       onChange={(e) => {
                         setamsToday(e.target.value);
-                        calcamsDifference(e.target.value, 1);
                       }}
                       aria-describedby="emailHelp"
                     />
@@ -413,13 +195,11 @@ export default function Tank({ dbpath1, setDate }) {
                     <h4 style={{ color: "red" }}>B-SPEED </h4> <br></br>
                     Reading Day
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={bspeedToday}
-                      id="bspeedToday"
+                        value={bspeedToday}
                       onChange={(e) => {
-                        setbspeedToday(e.target.value);
-                        calcbspeedDifference(e.target.value);
+                         setbspeedToday(e.target.value);
                       }}
                       aria-describedby="emailHelp"
                     />
@@ -428,13 +208,11 @@ export default function Tank({ dbpath1, setDate }) {
                     <h4 style={{ color: "red" }}>C-HSD </h4> <br></br>
                     Reading Day
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={hsdToday}
-                      id="hsdToday"
+                       value={hsdToday}
                       onChange={(e) => {
                         sethsdToday(e.target.value);
-                        calchsdDifference(e.target.value);
                       }}
                       aria-describedby="emailHelp"
                     />
@@ -458,10 +236,10 @@ export default function Tank({ dbpath1, setDate }) {
                   <div className="col-4">
                     Last Day<br></br>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
+                      // value={amsToday}
                       value={amsLast}
-                      id="amsLast"
                       aria-describedby="emailHelp"
                       disabled
                     />
@@ -469,7 +247,7 @@ export default function Tank({ dbpath1, setDate }) {
                   <div className="col-4">
                     Last Day
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
                       value={bspeedLast}
                       id="bspeedLast"
@@ -480,7 +258,7 @@ export default function Tank({ dbpath1, setDate }) {
                   <div className="col-4">
                     Last Day
                     <input
-                      type="text"
+                      type="number"
                       class="form-control inputDivPrice"
                       value={hsdLast}
                       id="hsdLast"
@@ -494,11 +272,10 @@ export default function Tank({ dbpath1, setDate }) {
                     <br></br>
                     Difference MS
                     <input
-                      type="email"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={amsDifference}
-                      id="diffms"
-                      aria-describedby="emailHelp"
+                      value={parseFloat(amsToday -amsLast)}
+                      // value={parseFloat(amsDifference)}
                       disabled
                     />
                   </div>
@@ -506,9 +283,11 @@ export default function Tank({ dbpath1, setDate }) {
                     <br></br>
                     Difference Speed
                     <input
-                      type="email"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={bspeedDifference}
+                      // value={bspeedDifference}
+                      value={parseFloat(bspeedToday -bspeedLast)}
+
                       id="diffspeed"
                       aria-describedby="emailHelp"
                       disabled
@@ -518,22 +297,24 @@ export default function Tank({ dbpath1, setDate }) {
                     <br></br>
                     Difference HSD
                     <input
-                      type="email"
+                      type="number"
                       class="form-control inputDivPrice"
-                      value={hsdDifference}
+                      // value={hsdDifference}
+                      value={parseFloat(hsdToday -hsdLast)}
                       id="diffhsd"
                       aria-describedby="emailHelp"
                       disabled
                     />
                   </div>
-                  <div className="savepop" id="savepop">
-                    <center>
+
+                  {/* <div className="savepop" id="savepop">
+                    <div>
                       <br></br>
                       <h3>Saved ✅</h3>
                       <h5 style={{ marginTop: "20px", marginBottom: "20px" }}>
                         {" "}
                         Difference MS :
-                        <span className="diffms"> {amsDifference} </span>{" "}
+                        <span className="diffms">FSCC {amsDifference} </span>{" "}
                         <br></br>
                         Difference Speed :
                         <span className="diffspeed"> {bspeedDifference} </span>
@@ -546,13 +327,13 @@ export default function Tank({ dbpath1, setDate }) {
                         type="button"
                         id="savebtn"
                         style={{ backgroundColor: "green", color: "white" }}
-                        onClick={onOkay}
+                        // onClick={onOkay}
                         class="btn"
                       >
                         Okay
                       </button>
-                    </center>
-                  </div>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>
