@@ -213,7 +213,7 @@ const getDayStartData = async (dateSelected, adjust) => {
               else{
                 document.getElementById('diffhsd').style.color = 'red';
               }
-             adjustDate(dateSelected,-1);
+            //  adjustDate(dateSelected,-1);
 
           } else {
               setamsToday("");
@@ -222,7 +222,7 @@ const getDayStartData = async (dateSelected, adjust) => {
               setamsDifference(0);
               setbspeedDifference(0);
               sethsdDifference(0);
-              adjustDate(dateSelected,-1);
+              // adjustDate(dateSelected,-1);
 
 
               // Data is not available

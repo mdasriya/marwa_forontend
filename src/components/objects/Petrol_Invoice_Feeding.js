@@ -60,117 +60,117 @@ export default function Petrol_Invoice_Feeding({dbpath1}) {
             } 
     }
 
-    const loadInvoiceFeeding = async () => {
-        let query="SELECT * FROM `rwt_petrol_invoice_feeding` where date ='"+datecache+"';;";
-        /*  
-            alert(query); */
-            const url = dbpath1 + 'getDynamic.php';
-            let fData = new FormData();
+    // const loadInvoiceFeeding = async () => {
+    //     let query="SELECT * FROM `rwt_petrol_invoice_feeding` where date ='"+datecache+"';;";
+    //     /*  
+    //         alert(query); */
+    //         const url = dbpath1 + 'getDynamic.php';
+    //         let fData = new FormData();
 
-            fData.append('query', query);
+    //         fData.append('query', query);
 
-            try {
-                const response = await axios.post(url, fData);
+    //         try {
+    //             const response = await axios.post(url, fData);
                 
-                if (response && response.data) {
+    //             if (response && response.data) {
                     
-                    if (response.data.phpresult) {
-                        setFeedings(response.data.phpresult); 
-                        console.log(response.data.phpresult);
+    //                 if (response.data.phpresult) {
+    //                     setFeedings(response.data.phpresult); 
+    //                     console.log(response.data.phpresult);
                         
-                    }
-                }
-            } catch (error) {
-                console.log("Please Select Proper Input");
-            } 
-      }
+    //                 }
+    //             }
+    //         } catch (error) {
+    //             console.log("Please Select Proper Input");
+    //         } 
+    //   }
 
-      const loadtamount = async () => {
-        let query="SELECT sum(total_amount) as ftamount FROM `rwt_petrol_invoice_feeding` where date ='"+datecache+"';";
-            /* alert(query); */
-            const url = dbpath1 + 'getDynamic.php';
-            let fData = new FormData();
+    //   const loadtamount = async () => {
+    //     let query="SELECT sum(total_amount) as ftamount FROM `rwt_petrol_invoice_feeding` where date ='"+datecache+"';";
+    //         /* alert(query); */
+    //         const url = dbpath1 + 'getDynamic.php';
+    //         let fData = new FormData();
 
-            fData.append('query', query);
+    //         fData.append('query', query);
 
-            try {
-                const response = await axios.post(url, fData);
+    //         try {
+    //             const response = await axios.post(url, fData);
                 
-                if (response && response.data) {
+    //             if (response && response.data) {
                     
-                    if (response.data.phpresult) {
-                        document.getElementById('tamountid').innerHTML = response.data.phpresult[0]['ftamount'];
-                        console.log(response.data.phpresult[0]['ftamount']);
+    //                 if (response.data.phpresult) {
+    //                     document.getElementById('tamountid').innerHTML = response.data.phpresult[0]['ftamount'];
+    //                     console.log(response.data.phpresult[0]['ftamount']);
                         
-                    }
-                }
-            } catch (error) {
-                console.log("Please Select Proper Input");
-            } 
-      }
+    //                 }
+    //             }
+    //         } catch (error) {
+    //             console.log("Please Select Proper Input");
+    //         } 
+    //   }
 
-      const loadMachine = async () => {
-        const result1 = await axios.get(dbpath1+"getMachine.php");
-        setMachinen(result1.data.phpresult);
-        console.log(result1.data.phpresult); 
-      }
+    //   const loadMachine = async () => {
+    //     const result1 = await axios.get(dbpath1+"getMachine.php");
+    //     setMachinen(result1.data.phpresult);
+    //     console.log(result1.data.phpresult); 
+    //   }
   
     const navigate = useNavigate();
 
-    const onAdd = () =>{
+    // const onAdd = () =>{
       
-              const url = dbpath1+'delTank.php';
+    //           const url = dbpath1+'delTank.php';
   
-              var query = "INSERT INTO `rwt_petrol_invoice_feeding` (`feeding_id`, `sno`, `date`, `invoice_no`, `product`, `quantity`, `rate`, `value`, `taxable_value`, `product_amount`, `vat`, `vatlst`, `cess`, `tcs`, `total_amount`) VALUES (NULL, '"+sr+"', '"+datecache+"', '"+invoice_no+"', '"+productName+"', '"+Qty+"', '"+rate+"', '"+value+"', '"+taxable_amount+"', '"+ProductAmt+"', '"+vat+"', '"+vatlst+"', '"+cess+"', '"+tcs+"', '"+tamount+"');";
+    //           var query = "INSERT INTO `rwt_petrol_invoice_feeding` (`feeding_id`, `sno`, `date`, `invoice_no`, `product`, `quantity`, `rate`, `value`, `taxable_value`, `product_amount`, `vat`, `vatlst`, `cess`, `tcs`, `total_amount`) VALUES (NULL, '"+sr+"', '"+datecache+"', '"+invoice_no+"', '"+productName+"', '"+Qty+"', '"+rate+"', '"+value+"', '"+taxable_amount+"', '"+ProductAmt+"', '"+vat+"', '"+vatlst+"', '"+cess+"', '"+tcs+"', '"+tamount+"');";
   
-              let fData = new FormData();
-              fData.append('query', query);
-              axios.post(url, fData)
-                .then(response =>{ alert(response.data); window.location.reload(); setCacheData();})
-                .catch(error => {
-                  console.log(error.toJSON()); 
-            }); 
+    //           let fData = new FormData();
+    //           fData.append('query', query);
+    //           axios.post(url, fData)
+    //             .then(response =>{ alert(response.data); window.location.reload(); setCacheData();})
+    //             .catch(error => {
+    //               console.log(error.toJSON()); 
+    //         }); 
         
-    }
+    // }
 
-    const onDelete = async (index) => {
-      let query="DELETE FROM `rwt_petrol_invoice_feeding` WHERE feeding_id = "+index+";";
+//     const onDelete = async (index) => {
+//       let query="DELETE FROM `rwt_petrol_invoice_feeding` WHERE feeding_id = "+index+";";
     
-      /* alert(query); */
-      const url = dbpath1+'delTank.php';
-      let fData = new FormData();
-      fData.append('query', query);
+//       /* alert(query); */
+//       const url = dbpath1+'delTank.php';
+//       let fData = new FormData();
+//       fData.append('query', query);
       
-      axios.post(url, fData)
-          .then(response =>{ alert(response.data); window.location.reload();})
-          .catch(error => {
-          console.log(error.toJSON());
-          });
+//       axios.post(url, fData)
+//           .then(response =>{ alert(response.data); window.location.reload();})
+//           .catch(error => {
+//           console.log(error.toJSON());
+//           });
         
-      loadInvoiceFeeding();
+//     //   loadInvoiceFeeding();
       
-  }
+//   }
 
-  const calc = (qty) => {
-    const selectedProduct = ProductData.find(product1 => product1.product_id ===product);
-    let temp1 = selectedProduct.rate;
-    setProductName(selectedProduct.product_name);
-    setRate(selectedProduct.rate);
-    let temp2 = qty * selectedProduct.rate;
-    setValue(temp2.toFixed(2));
-    setTaxableAmount(selectedProduct.t_amount*qty);
-    let temp3  = temp2+(selectedProduct.t_amount*qty);
-    setProductAmt(temp3.toFixed(2));
-    setVat(selectedProduct.vat);
-    let temp4 = parseFloat(((temp3/100)*selectedProduct.vat)+temp3.toFixed(2));
-    setVatlst(temp4.toFixed(2));
-    let temp5 = selectedProduct.cess*qty;
-    setCess(temp5.toFixed(2));
-    setTCS(selectedProduct.tcs);
-    let temp6 = parseFloat(temp3.toFixed(2)) + parseFloat(temp4.toFixed(2)) + parseFloat(temp5.toFixed(2));
-    setTamount(temp6.toFixed(2));
+//   const calc = (qty) => {
+//     const selectedProduct = ProductData.find(product1 => product1.product_id ===product);
+//     let temp1 = selectedProduct.rate;
+//     setProductName(selectedProduct.product_name);
+//     setRate(selectedProduct.rate);
+//     let temp2 = qty * selectedProduct.rate;
+//     setValue(temp2.toFixed(2));
+//     setTaxableAmount(selectedProduct.t_amount*qty);
+//     let temp3  = temp2+(selectedProduct.t_amount*qty);
+//     setProductAmt(temp3.toFixed(2));
+//     setVat(selectedProduct.vat);
+//     let temp4 = parseFloat(((temp3/100)*selectedProduct.vat)+temp3.toFixed(2));
+//     setVatlst(temp4.toFixed(2));
+//     let temp5 = selectedProduct.cess*qty;
+//     setCess(temp5.toFixed(2));
+//     setTCS(selectedProduct.tcs);
+//     let temp6 = parseFloat(temp3.toFixed(2)) + parseFloat(temp4.toFixed(2)) + parseFloat(temp5.toFixed(2));
+//     setTamount(temp6.toFixed(2));
 
-} 
+// } 
 
  
 // function convertDateFormat(inputDate) {
@@ -281,7 +281,8 @@ export default function Petrol_Invoice_Feeding({dbpath1}) {
                                
                             </td>
                             <td className='bigFontWeight' >
-                                <input type="text" class=" editableInput form-control bigFontWeight"  placeholder="KL/Qty" onChange={(e) =>{ setQty(e.target.value); calc(e.target.value); }} />
+                                <input type="text" class=" editableInput form-control bigFontWeight"  placeholder="KL/Qty" 
+                                 />
                             </td>
                             <td className='bigFontWeight' >
                                (X)
@@ -355,7 +356,7 @@ export default function Petrol_Invoice_Feeding({dbpath1}) {
                         </tr>
                     </tbody>
                 </table>    
-                <center><button type="button" class="btn btn-primary " onClick={onAdd}>Add</button></center>
+                <center><button type="button" class="btn btn-primary " >Add</button></center>
             </div>
             <br></br>
             <div>
@@ -470,7 +471,7 @@ export default function Petrol_Invoice_Feeding({dbpath1}) {
                             <td className='bigFontWeight' >
                                 {res.total_amount}
                             </td>
-                           <td><button type="button" id={"tank"+res.feeding_id} class="btn btn-danger" onClick={() => onDelete(res.feeding_id)}>Delete</button>
+                           <td><button type="button" id={"tank"+res.feeding_id} class="btn btn-danger">Delete</button>
                                   </td>
                                 </tr>   
                     )}

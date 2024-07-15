@@ -365,8 +365,10 @@ export default function Nozzles({ dbpath1 }) {
                       type="button"
                       id={"tank" + res.nozzle_id}
                       class="btn btn-danger"
-                      onClick={() => onDelete(res.nozzle_id)}
+
+                      // onClick={() => onDelete(res.nozzle_id)}
                     >
+
                       Delete
                     </button>
                   </td>
